@@ -65,7 +65,7 @@
 
 
 ## Итоговая схема
-![ip_design.png](ip_design.png)
+![Topology.png](Topology.png)
 
 #### Полезные ссылки:
 - [RFC1918. Про выделение IPv4-адресов для приватных сетей](https://datatracker.ietf.org/doc/html/rfc1918)
