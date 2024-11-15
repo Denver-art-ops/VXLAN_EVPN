@@ -58,10 +58,10 @@
 |DC#1|POD1|       |PtP_link  |dc01_pod01_leaf01# |LEAF01->SPINE02      |ce0/2         |10.11.3.7/31 |
 |DC#1|POD1|       |PtP_link  |dc01_pod01_leaf02# |LEAF02->SPINE02      |ce0/2         |10.11.3.9/31 |
 |DC#1|POD1|       |PtP_link  |dc01_pod01_leaf03# |LEAF03->SPINE02      |ce0/2         |10.11.3.11/31|
-|DC#1|POD1|       |PtP_link  |dc01_pod01_leaf01# |LEAF01->CLIENT01     |te0/1         |10.11.4.1/32 |
-|DC#1|POD1|       |PtP_link  |dc01_pod01_leaf02# |LEAF02->CLIENT02     |te0/1         |10.11.4.5/32 |
-|DC#1|POD1|       |PtP_link  |dc01_pod01_leaf03# |LEAF03->CLIENT03     |te0/1         |10.11.4.9/32 |
-|DC#1|POD1|       |PtP_link  |dc01_pod01_leaf03# |LEAF03->CLIENT04     |te0/2         |10.11.4.13/32|
+|DC#1|POD1|       |PtP_link  |dc01_pod01_leaf01# |LEAF01->CLIENT01     |te0/1         |10.11.4.1/31 |
+|DC#1|POD1|       |PtP_link  |dc01_pod01_leaf02# |LEAF02->CLIENT02     |te0/1         |10.11.4.5/31 |
+|DC#1|POD1|       |PtP_link  |dc01_pod01_leaf03# |LEAF03->CLIENT03     |te0/1         |10.11.4.9/31 |
+|DC#1|POD1|       |PtP_link  |dc01_pod01_leaf03# |LEAF03->CLIENT04     |te0/2         |10.11.4.13/31|
 
 
 ## Итоговая схема
