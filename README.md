@@ -39,12 +39,14 @@
 |DC#1|POD1|LEAF01 |loopback  |dc01-pod01-leaf01# |LEAF01               |loopback 1    |10.11.1.3/32 |
 |DC#1|POD1|LEAF02 |loopback  |dc01-pod01-leaf02# |LEAF02               |loopback 1    |10.11.1.4/32 |
 |DC#1|POD1|LEAF03 |loopback  |dc01-pod01-leaf03# |LEAF03               |loopback 1    |10.11.1.5/32 |
+|DC#1|POD1|LEAF03 |loopback  |dc01-pod01-leaf04# |LEAF04               |loopback 1    |10.11.1.6/32 |
 |DC#1|POD1|резерв |резерв    |резерв             |резерв               |loopback 1    |10.11.1.0/26 |
 |DC#1|POD1|SPINE01|loopback  |dc01-pod01-spine01#|SPINE01              |loopback 2    |10.11.2.1/32 |
 |DC#1|POD1|SPINE02|loopback  |dc01-pod01-spine02#|SPINE02              |loopback 2    |10.11.2.2/32 |
 |DC#1|POD1|LEAF01 |loopback  |dc01-pod01-leaf01# |LEAF01               |loopback 2    |10.11.2.3/32 |
 |DC#1|POD1|LEAF02 |loopback  |dc01-pod01-leaf02# |LEAF02               |loopback 2    |10.11.2.4/32 |
 |DC#1|POD1|LEAF03 |loopback  |dc01-pod01-leaf03# |LEAF03               |loopback 2    |10.11.2.5/32 |
+|DC#1|POD1|LEAF03 |loopback  |dc01-pod01-leaf04# |LEAF04               |loopback 2    |10.11.2.6/32 |
 |DC#1|POD1|резерв |резерв    |резерв             |резерв               |loopback 2    |10.11.2.0/26 |
 |DC#1|POD1|SPINE01|PtP_link  |dc01-pod01-spine01#|SPINE01->LEAF01      |eth 1         |10.11.3.0/31 |
 |DC#1|POD1|SPINE01|PtP_link  |dc01-pod01-spine01#|SPINE01->LEAF02      |eth 2         |10.11.3.2/31 |
@@ -56,8 +58,8 @@
 |DC#1|POD1|SPINE01|PtP_link  |dc01-pod01-spine01#|SPINE01->BLEAF02     |eth 8         |10.11.3.14/31|
 |DC#1|POD1|SPINE01|PtP_link  |dc01-pod01-spine01#|SPINE01->BGW01       |eth 9         |10.11.3.16/31|
 |DC#1|POD1|SPINE01|PtP_link  |dc01-pod01-spine01#|SPINE01->BGW02       |eth 10        |10.11.3.18/31|
-|DC#1|POD1|SPINE01|PtP_link  |резерв             |резерв               |              |10.11.3.x/31|
-|DC#1|POD1|SPINE02|PtP_link  |dc01-pod01-spine02#|SPINE02->LEAF01      |eth 1         |10.11.3.40/31 |
+|DC#1|POD1|SPINE01|PtP_link  |резерв             |резерв               |              |10.11.3.x/31 |
+|DC#1|POD1|SPINE02|PtP_link  |dc01-pod01-spine02#|SPINE02->LEAF01      |eth 1         |10.11.3.40/31|
 |DC#1|POD1|SPINE02|PtP_link  |dc01-pod01-spine02#|SPINE02->LEAF02      |eth 2         |10.11.3.42/31|
 |DC#1|POD1|SPINE02|PtP_link  |dc01-pod01-spine02#|SPINE02->LEAF03      |eth 3         |10.11.3.44/31|
 |DC#1|POD1|SPINE02|PtP_link  |dc01-pod01-spine02#|SPINE02->LEAF04      |eth 4         |10.11.3.46/31|
