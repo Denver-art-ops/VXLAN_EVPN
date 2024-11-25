@@ -41,11 +41,11 @@
 |DC#1|POD1|LEAF03 |loopback  |dc01-pod01-leaf03# |LEAF03               |loopback 1    |10.11.1.5/32 |
 |DC#1|POD1|LEAF03 |loopback  |dc01-pod01-leaf04# |LEAF04               |loopback 1    |10.11.1.6/32 |
 |DC#1|POD1|LEAF03 |loopback  |dc01-pod01-Sleaf01#|SLEAF01              |loopback 1    |10.11.1.7/32 |
-|DC#1|POD1|LEAF03 |loopback  |dc01-pod01-Sleaf01#|SLEAF02              |loopback 1    |10.11.1.8/32 |
+|DC#1|POD1|LEAF03 |loopback  |dc01-pod01-Sleaf02#|SLEAF02              |loopback 1    |10.11.1.8/32 |
 |DC#1|POD1|LEAF03 |loopback  |dc01-pod01-Bleaf01#|BLEAF01              |loopback 1    |10.11.1.9/32 |
 |DC#1|POD1|LEAF03 |loopback  |dc01-pod01-Bleaf01#|BLEAF02              |loopback 1    |10.11.1.10/32|
-|DC#1|POD1|LEAF03 |loopback  |dc01-pod01-Bleaf01#|BGW01                |loopback 1    |10.11.1.11/32|
-|DC#1|POD1|LEAF03 |loopback  |dc01-pod01-Bleaf01#|BGW02                |loopback 1    |10.11.1.12/32|
+|DC#1|POD1|LEAF03 |loopback  |dc01-pod01-BGW01#  |BGW01                |loopback 1    |10.11.1.11/32|
+|DC#1|POD1|LEAF03 |loopback  |dc01-pod01-BGW02#  |BGW02                |loopback 1    |10.11.1.12/32|
 |DC#1|POD1|резерв |резерв    |резерв             |резерв               |loopback 1    |10.11.1.0/26 |
 |DC#1|POD1|SPINE01|loopback  |dc01-pod01-spine01#|SPINE01              |loopback 2    |10.11.2.1/32 |
 |DC#1|POD1|SPINE02|loopback  |dc01-pod01-spine02#|SPINE02              |loopback 2    |10.11.2.2/32 |
@@ -80,9 +80,9 @@
 |DC#1|POD1|       |PtP_link  |dc01-pod01-leaf03# |LEAF03->SPINE01      |eth 1         |10.11.3.5/31 |
 |DC#1|POD1|       |PtP_link  |dc01-pod01-leaf04# |LEAF04->SPINE01      |eth 1         |10.11.3.7/31 |
 |DC#1|POD1|       |PtP_link  |dc01-pod01-Sleaf01#|SLEAF01->SPINE01     |eth 1         |10.11.3.9/31 |
-|DC#1|POD1|       |PtP_link  |dc01-pod01-Sleaf01#|SLEAF02->SPINE01     |eth 1         |10.11.3.11/31|
+|DC#1|POD1|       |PtP_link  |dc01-pod01-Sleaf02#|SLEAF02->SPINE01     |eth 1         |10.11.3.11/31|
 |DC#1|POD1|       |PtP_link  |dc01-pod01-Bleaf01#|BLEAF01->SPINE01     |eth 1         |10.11.3.13/31|
-|DC#1|POD1|       |PtP_link  |dc01-pod01-Bleaf01#|BLEAF02->SPINE01     |eth 1         |10.11.3.15/31|
+|DC#1|POD1|       |PtP_link  |dc01-pod01-Bleaf02#|BLEAF02->SPINE01     |eth 1         |10.11.3.15/31|
 |DC#1|POD1|       |PtP_link  |dc01-pod01-BGW01#  |BGW01->SPINE01       |eth 1         |10.11.3.17/31|
 |DC#1|POD1|       |PtP_link  |dc01-pod01-BGW02#  |BGW02->SPINE01       |eth 1         |10.11.3.19/31|
 |DC#1|POD1|       |PtP_link  |dc01-pod01-leaf01# |LEAF01->SPINE02      |eth 2         |10.11.3.41/31|
@@ -90,9 +90,9 @@
 |DC#1|POD1|       |PtP_link  |dc01-pod01-leaf03# |LEAF03->SPINE02      |eth 2         |10.11.3.45/31|
 |DC#1|POD1|       |PtP_link  |dc01-pod01-leaf03# |LEAF04->SPINE02      |eth 2         |10.11.3.47/31|
 |DC#1|POD1|       |PtP_link  |dc01-pod01-Sleaf01#|SLEAF01->SPINE02     |eth 2         |10.11.3.49/31 |
-|DC#1|POD1|       |PtP_link  |dc01-pod01-Sleaf01#|SLEAF02->SPINE02     |eth 2         |10.11.3.51/31|
+|DC#1|POD1|       |PtP_link  |dc01-pod01-Sleaf02#|SLEAF02->SPINE02     |eth 2         |10.11.3.51/31|
 |DC#1|POD1|       |PtP_link  |dc01-pod01-Bleaf01#|BLEAF01->SPINE02     |eth 2         |10.11.3.53/31|
-|DC#1|POD1|       |PtP_link  |dc01-pod01-Bleaf01#|BLEAF02->SPINE02     |eth 2         |10.11.3.55/31|
+|DC#1|POD1|       |PtP_link  |dc01-pod01-Bleaf02#|BLEAF02->SPINE02     |eth 2         |10.11.3.55/31|
 |DC#1|POD1|       |PtP_link  |dc01-pod01-BGW01#  |BGW01->SPINE02       |eth 2         |10.11.3.57/31|
 |DC#1|POD1|       |PtP_link  |dc01-pod01-BGW02#  |BGW02->SPINE02       |eth 2         |10.11.3.59/31|
 |DC#1|POD1|       |PtP_link  |dc01-pod01-leaf01# |LEAF01->CLIENT01     |te0/1         |10.11.4.1/30 |
