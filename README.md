@@ -43,7 +43,7 @@
 |DC#1|POD1|LEAF03 |loopback  |dc01-pod01-Sleaf01#|SLEAF01              |loopback 1    |10.11.1.7/32 |
 |DC#1|POD1|LEAF03 |loopback  |dc01-pod01-Sleaf02#|SLEAF02              |loopback 1    |10.11.1.8/32 |
 |DC#1|POD1|LEAF03 |loopback  |dc01-pod01-Bleaf01#|BLEAF01              |loopback 1    |10.11.1.9/32 |
-|DC#1|POD1|LEAF03 |loopback  |dc01-pod01-Bleaf01#|BLEAF02              |loopback 1    |10.11.1.10/32|
+|DC#1|POD1|LEAF03 |loopback  |dc01-pod01-Bleaf02#|BLEAF02              |loopback 1    |10.11.1.10/32|
 |DC#1|POD1|LEAF03 |loopback  |dc01-pod01-BGW01#  |BGW01                |loopback 1    |10.11.1.11/32|
 |DC#1|POD1|LEAF03 |loopback  |dc01-pod01-BGW02#  |BGW02                |loopback 1    |10.11.1.12/32|
 |DC#1|POD1|резерв |резерв    |резерв             |резерв               |loopback 1    |10.11.1.0/26 |
