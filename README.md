@@ -79,13 +79,16 @@
 |DC#1|POD1|       |PtP_link  |dc01-pod01-Bleaf01#|BLEAF02->SPINE01     |eth 1         |10.11.3.15/31|
 |DC#1|POD1|       |PtP_link  |dc01-pod01-BGW01#  |BGW01->SPINE01       |eth 1         |10.11.3.17/31|
 |DC#1|POD1|       |PtP_link  |dc01-pod01-BGW02#  |BGW02->SPINE01       |eth 1         |10.11.3.19/31|
-
-
-
-|DC#1|POD1|       |PtP_link  |dc01-pod01-leaf01# |LEAF01->SPINE02      |eth 2         |10.11.3.9/31 |
-|DC#1|POD1|       |PtP_link  |dc01-pod01-leaf02# |LEAF02->SPINE02      |eth 2         |10.11.3.11/31|
-|DC#1|POD1|       |PtP_link  |dc01-pod01-leaf03# |LEAF03->SPINE02      |eth 2         |10.11.3.13/31|
-|DC#1|POD1|       |PtP_link  |dc01-pod01-leaf03# |LEAF04->SPINE02      |eth 2         |10.11.3.15/31|
+|DC#1|POD1|       |PtP_link  |dc01-pod01-leaf01# |LEAF01->SPINE02      |eth 2         |10.11.3.41/31|
+|DC#1|POD1|       |PtP_link  |dc01-pod01-leaf02# |LEAF02->SPINE02      |eth 2         |10.11.3.43/31|
+|DC#1|POD1|       |PtP_link  |dc01-pod01-leaf03# |LEAF03->SPINE02      |eth 2         |10.11.3.45/31|
+|DC#1|POD1|       |PtP_link  |dc01-pod01-leaf03# |LEAF04->SPINE02      |eth 2         |10.11.3.47/31|
+|DC#1|POD1|       |PtP_link  |dc01-pod01-Sleaf01#|SLEAF01->SPINE02     |eth 2         |10.11.3.49/31 |
+|DC#1|POD1|       |PtP_link  |dc01-pod01-Sleaf01#|SLEAF02->SPINE02     |eth 2         |10.11.3.51/31|
+|DC#1|POD1|       |PtP_link  |dc01-pod01-Bleaf01#|BLEAF01->SPINE02     |eth 2         |10.11.3.53/31|
+|DC#1|POD1|       |PtP_link  |dc01-pod01-Bleaf01#|BLEAF02->SPINE02     |eth 2         |10.11.3.55/31|
+|DC#1|POD1|       |PtP_link  |dc01-pod01-BGW01#  |BGW01->SPINE02       |eth 2         |10.11.3.57/31|
+|DC#1|POD1|       |PtP_link  |dc01-pod01-BGW02#  |BGW02->SPINE02       |eth 2         |10.11.3.59/31|
 |DC#1|POD1|       |PtP_link  |dc01-pod01-leaf01# |LEAF01->CLIENT01     |te0/1         |10.11.4.1/30 |
 |DC#1|POD1|       |PtP_link  |dc01-pod01-leaf02# |LEAF02->CLIENT02     |te0/1         |10.11.4.5/30 |
 |DC#1|POD1|       |PtP_link  |dc01-pod01-leaf03# |LEAF03->CLIENT03     |te0/1         |10.11.4.9/30 |
