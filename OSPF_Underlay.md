@@ -12,8 +12,8 @@
 ![Topology_OSPF.png](Topology_OSPF.png)
 
 ## Конфигурации устройств:
-[SPINE01.cfg](SPINE01.cfg)      [BLEAF01.cfg](BLEAF01.cfg)   [SLEAF01.cfg](SLEAF01.cfg)  [BGW01.cfg](BGW01.cfg)
-[SPINE02.cfg](SPINE02.cfg)      [BLEAF02.cfg](BLEAF02.cfg)   [SLEAF02.cfg](SLEAF02.cfg)  [BGW02.cfg](BGW02.cfg)
+[SPINE01.cfg](SPINE01.cfg)   |   [BLEAF01.cfg](BLEAF01.cfg)  | [SLEAF01.cfg](SLEAF01.cfg) | [BGW01.cfg](BGW01.cfg)
+[SPINE02.cfg](SPINE02.cfg)   |   [BLEAF02.cfg](BLEAF02.cfg)  | [SLEAF02.cfg](SLEAF02.cfg) | [BGW02.cfg](BGW02.cfg)
 [LEAF01.cfg](LEAF01.cfg)
 [LEAF02.cfg](LEAF02.cfg)
 [LEAF03.cfg](LEAF03.cfg)
