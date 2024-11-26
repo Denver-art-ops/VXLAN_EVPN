@@ -9,7 +9,7 @@
 Описаны в документе: [README.md](README.md)
 
 ### Итоговая схема
-! [Topology_OSPF.png](Topology_OSPF.png)
+![Topology_OSPF.png](Topology_OSPF.png)
 
 ## Подтверждение работоспособности Топологии:
 
