@@ -30,7 +30,7 @@
 #### dc01-pod01-spine01#
 dc01-pod01-spine01#show ip ospf neighbor
 
-|Neighbor  |ID |Instance|VRF|Pri |State   |Dead      |Time      |Address|Interface|
+|Neighbor  |ID |Instance VRF|Pri|State |  Dead Time |Address | Interface | | |
 |----------|---|--------|---|----|--------|----------|----------|-------|---------|
 |10.11.1.3 |1  |default |0  |FULL|00:00:38|10.11.3.1 |Ethernet1 |       |         |
 |10.11.1.4 |1  |default |0  |FULL|00:00:33|10.11.3.3 |Ethernet2 |       |         |
@@ -48,7 +48,7 @@ dc01-pod01-spine01#show ip ospf neighbor
 
 dc01-pod01-spine02#show ip ospf neighbor
 
-|Neighbor  |ID |Instance|VRF|Pri |State   |Dead      |Time      |Address|Interface|
+|Neighbor  |ID |Instance VRF|Pri|State |  Dead Time |Address | Interface | | |
 |----------|---|--------|---|----|--------|----------|----------|-------|---------|
 |10.11.1.3 |1  |default |0  |FULL|00:00:35|10.11.3.41|Ethernet1 |       |         |
 |10.11.1.4 |1  |default |0  |FULL|00:00:31|10.11.3.43|Ethernet2 |       |         |
