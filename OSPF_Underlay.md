@@ -66,9 +66,12 @@ dc01-pod01-spine02#show ip ospf neighbor
 
 ### show ip ospf database
 
-dc01-pod01-spine01#
+#### dc01-pod01-spine01#
+
 show ip ospf database
+
 OSPF Router with ID(10.11.1.1) (Instance ID 1) (VRF default)
+
 Router Link States (Area 0.0.0.0)
 
 |Link ID   |ADV Router|Age |Seq#      |Checksum  | Link count ||||
@@ -86,11 +89,40 @@ Router Link States (Area 0.0.0.0)
 |10.11.1.7 |10.11.1.7 |3   |0x800010dc|0x7160|4       |        |    |     |
 |10.11.1.11|10.11.1.11|6   |0x80000c06|0x8a27|4       |        |    |     |
  
-Network   Link|States    (Area |0.0.0.0)
+Network   Link States    (Area 0.0.0.0)
           
-|Link      |ID        |ADV |Router    |Age   |Seq#    |Checksum|    |     |
-|10.11.3.12|10.11.1.1 |3600|0x80000332|0xfd97|        |        |    |     |
+|Link ID   |ADV Router|Age |Seq#      |Checksum  |  |
+|----------|----------|----|----------|----------|------------|
+|10.11.3.12|10.11.1.1 |3600|0x80000332|0xfd97    |            |      
 
 
+#### dc01-pod01-spine02#
+
+show ip ospf database
+
+OSPF Router with ID(10.11.1.2) (Instance ID 1) (VRF default)
+
+Router Link States (Area 0.0.0.0)
+
+|Link ID   |ADV Router|Age |Seq#      |Checksum  | Link count ||||
+|----------|----------|----|----------|------|--------|--------|----|-----|
+|10.11.1.3 |10.11.1.3 |5         |0x8000115e|0x1e7e    |4         |        |    |     |
+|10.11.1.4 |10.11.1.4 |59        |0x80001113|0x8edc    |5         |        |    |     |
+|10.11.1.8 |10.11.1.8 |9         |0x800011a5|0x96e3    |3         |        |    |     |
+|10.11.1.12|10.11.1.12|63        |0x80000cd2|0x78df    |5         |        |    |     |
+|10.11.1.6 |10.11.1.6 |5         |0x8000113b|0x9a0a    |4         |        |    |     |
+|10.11.1.10|10.11.1.10|4         |0x80000db3|0x7d0f    |5         |        |    |     |
+|10.11.1.2 |10.11.1.2 |2         |0x80004c28|0x246d    |13        |        |    |     |
+|10.11.1.1 |10.11.1.1 |4         |0x80004f67|0xcd9d    |18        |        |    |     |
+|10.11.1.5 |10.11.1.5 |5         |0x80001139|0xf3bb    |4         |        |    |     |
+|10.11.1.9 |10.11.1.9 |5         |0x80000d2e|0x4852    |4         |        |    |     |
+|10.11.1.7 |10.11.1.7 |49        |0x80001125|0x4ceb    |5         |        |    |     |
+|10.11.1.11|10.11.1.11|5         |0x80000c56|0xe977    |4         |        |    |     |
+
+Network Link States (Area 0.0.0.0)
+
+|Link ID   |ADV Router|Age |Seq#      |Checksum  | |
+|----------|----------|----|----------|----------|------------|
+|10.11.3.12|10.11.1.1|55 |0x80000342|0xdda7|    |        |
 
 ### show bfd peers
