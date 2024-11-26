@@ -127,6 +127,12 @@ Network Link States (Area 0.0.0.0)
 
 ### show bfd peers
 
+####dc01-pod1-spine01#show bfd peers
+
+VRF name: default
+
+---------------
+
 |DstAddr   |MyDisc   |YourDisc|Interface/Transport|Type  |LastUp         |FIELD7|
 |----------|---------|--------|-------------------|------|---------------|------|
 |----------|-----------|-----------|--------------------|-------|---------------|      |
@@ -135,11 +141,14 @@ Network Link States (Area 0.0.0.0)
 |10.11.3.11|489812962|0       |Ethernet6(22)      |normal|NA             |      |
 |10.11.3.15|3370762451|2431296866|Ethernet8(24)      |normal|11/26/24       |08:03 |
 |10.11.3.19|3411553515|0       |Ethernet10(26)     |normal|NA             |      |
-|          |LastDown |LastDiag|State              |      |               |      |
-|--------------|-------------------|-----   |                   |      |               |      |
-|          |NA       |No      |Diagnostic         |Up    |               |      |
-|          |NA       |No      |Diagnostic         |Down  |               |      |
-|          |NA       |No      |Diagnostic         |Down  |               |      |
-|          |NA       |No      |Diagnostic         |Up    |               |      |
-|          |NA       |No      |Diagnostic         |Down  |               |      |
+
+|LastDown           |LastDiag|State     |FIELD5|
+|-------------------|--------|----------|------|
+|-------------------|-----   |          |      |
+|NA                 |No      |Diagnostic|Up    |
+|NA                 |No      |Diagnostic|Down  |
+|NA                 |No      |Diagnostic|Down  |
+|NA                 |No      |Diagnostic|Up    |
+|NA                 |No      |Diagnostic|Down  |
+
 
