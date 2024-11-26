@@ -126,3 +126,20 @@ Network Link States (Area 0.0.0.0)
 |10.11.3.12|10.11.1.1|55 |0x80000342|0xdda7|    |        |
 
 ### show bfd peers
+
+|DstAddr   |MyDisc   |YourDisc|Interface/Transport|Type  |LastUp         |FIELD7|
+|----------|---------|--------|-------------------|------|---------------|------|
+|----------|-----------|-----------|--------------------|-------|---------------|      |
+|10.11.3.5 |2121572179|4247378117|Ethernet3(19)      |normal|11/26/24       |08:03 |
+|10.11.3.9 |2738729602|0       |Ethernet5(21)      |normal|NA             |      |
+|10.11.3.11|489812962|0       |Ethernet6(22)      |normal|NA             |      |
+|10.11.3.15|3370762451|2431296866|Ethernet8(24)      |normal|11/26/24       |08:03 |
+|10.11.3.19|3411553515|0       |Ethernet10(26)     |normal|NA             |      |
+|          |LastDown |LastDiag|State              |      |               |      |
+|--------------|-------------------|-----   |                   |      |               |      |
+|          |NA       |No      |Diagnostic         |Up    |               |      |
+|          |NA       |No      |Diagnostic         |Down  |               |      |
+|          |NA       |No      |Diagnostic         |Down  |               |      |
+|          |NA       |No      |Diagnostic         |Up    |               |      |
+|          |NA       |No      |Diagnostic         |Down  |               |      |
+
