@@ -166,3 +166,33 @@ IS-IS Level 2 Link State Database
 |     |LEAF04.00-00 |108260|17919|1109|363   |L2 |<>   |
 |     |SLEAF01.00-00|8     |23827|437 |368   |L2 |<>   |
 |     |SLEAF02.00-00|9     |2855 |610 |368   |L2 |<>   |
+
+
+
+## Проверяем доступность loopback1 SPINE02 c SPINE01:
+
+dc01-pod01-spine01#ping 10.11.1.2
+PING 10.11.1.2 (10.11.1.2) 72(100) bytes of data.
+80 bytes from 10.11.1.2: icmp_seq=1 ttl=63 time=86.1 ms
+80 bytes from 10.11.1.2: icmp_seq=2 ttl=63 time=81.1 ms
+80 bytes from 10.11.1.2: icmp_seq=3 ttl=63 time=80.2 ms
+80 bytes from 10.11.1.2: icmp_seq=4 ttl=63 time=76.2 ms
+80 bytes from 10.11.1.2: icmp_seq=5 ttl=63 time=78.3 ms
+
+--- 10.11.1.2 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 48ms
+rtt min/avg/max/mdev = 76.225/80.420/86.186/3.356 ms, pipe 5, ipg/ewma 12.092/83.120 ms
+
+## Проверяем доступность loopback1 LEAF04 c SPINE01:
+
+dc01-pod01-spine01#ping 10.11.1.6
+PING 10.11.1.6 (10.11.1.6) 72(100) bytes of data.
+80 bytes from 10.11.1.6: icmp_seq=1 ttl=64 time=11.5 ms
+80 bytes from 10.11.1.6: icmp_seq=2 ttl=64 time=13.1 ms
+80 bytes from 10.11.1.6: icmp_seq=3 ttl=64 time=10.3 ms
+80 bytes from 10.11.1.6: icmp_seq=4 ttl=64 time=7.96 ms
+80 bytes from 10.11.1.6: icmp_seq=5 ttl=64 time=13.8 ms
+
+--- 10.11.1.6 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 59ms
+rtt min/avg/max/mdev = 7.964/11.370/13.850/2.096 ms, ipg/ewma 14.913/11.457 ms
