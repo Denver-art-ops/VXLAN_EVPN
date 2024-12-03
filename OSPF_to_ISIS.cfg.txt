@@ -1,0 +1,33 @@
+! 
+no router ospf 1
+!
+router isis ZEUS
+log-adjacency-changes
+authentication mode md5
+authentication key ZEUS
+net 49.0001.0000.0000.0000.0010.0011.0001.0010.00
+is-hostname BLEAF02
+address-family ipv4 unicast
+!
+interface ethernet 1-2
+   isis enable ZEUS
+   isis bfd
+   isis network point-to-point
+   isis authentication mode md5
+   isis authentication key ZEUS
+   no ip ospf neighbor bfd
+   no ip ospf network point-to-point
+   no ip ospf authentication message-digest
+   no ip ospf authentication-key 
+   no ip ospf area 0.0.0.0
+!
+interface Loopback1
+no ip ospf area 0.0.0.0
+isis enable ZEUS
+!
+
+!
+
+
+!
+end
