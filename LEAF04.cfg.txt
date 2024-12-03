@@ -48,7 +48,7 @@ interface Ethernet8
 !
 interface Loopback1
    ip address 10.11.1.6/32
-   ip ospf area 0.0.0.0
+   isis enable ZEUS
 !
 interface Management1
 !
