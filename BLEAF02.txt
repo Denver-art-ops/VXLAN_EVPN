@@ -1,0 +1,77 @@
+dc01-pod01-Bleaf02#show running-config
+! Command: show running-config
+! device: dc01-pod01-Bleaf02 (vEOS-lab, EOS-4.29.2F)
+!
+! boot system flash:/vEOS-lab.swi
+!
+no aaa root
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model ribd
+!
+hostname dc01-pod01-Bleaf02
+!
+spanning-tree mode mstp
+!
+interface Ethernet1
+   description =LINK-TO_SPINE01=
+   no switchport
+   ip address 10.11.3.15/31
+   no ip ospf neighbor bfd
+   no isis bfd
+!
+interface Ethernet2
+   description =LINK-TO_SPINE02=
+   no switchport
+   ip address 10.11.3.55/31
+   no ip ospf neighbor bfd
+   no isis bfd
+!
+interface Ethernet3
+!
+interface Ethernet4
+!
+interface Ethernet5
+!
+interface Ethernet6
+!
+interface Ethernet7
+!
+interface Ethernet8
+!
+interface Loopback1
+   ip address 10.11.1.10/32
+!
+interface Management1
+!
+ip routing
+!
+ip prefix-list PL_1
+   seq 10 permit 10.11.1.0/24 le 32
+   seq 20 permit 10.11.3.0/24 le 32
+!
+route-map MAP_1 permit 10
+   match ip address prefix-list PL_1
+!
+router bgp 4259905202
+   router-id 10.11.1.10
+   graceful-restart restart-time 300
+   neighbor 10.11.3.14 remote-as 4259840001
+   neighbor 10.11.3.14 bfd
+   neighbor 10.11.3.14 description SPINE01
+   neighbor 10.11.3.14 route-map MAP_1 in
+   neighbor 10.11.3.14 password 7 7aYBVA/JiU8=
+   neighbor 10.11.3.54 remote-as 4259840002
+   neighbor 10.11.3.54 bfd
+   neighbor 10.11.3.54 description SPINE02
+   neighbor 10.11.3.54 route-map MAP_1 in
+   neighbor 10.11.3.54 password 7 48bUQaGsEyA=
+   network 10.11.1.10/32
+   network 10.11.3.14/31
+   network 10.11.3.54/31
+   !
+   address-family ipv4
+      graceful-restart
+!
+end

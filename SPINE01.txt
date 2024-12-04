@@ -1,0 +1,175 @@
+dc01-pod01-spine01#sho running-config
+! Command: show running-config
+! device: dc01-pod01-spine01 (vEOS-lab, EOS-4.29.2F)
+!
+! boot system flash:/vEOS-lab.swi
+!
+no aaa root
+!
+username Denis secret sha512 $6$y4fXjrcDJ1eVI4aJ$JCiZRs.t0Kx0f3BRqUioTguW5BhatcFeAsKQQkUQaOWS7LWhHXRRKGyeSLP8xF/aU3LOubedln.MaGkP91arx.
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model ribd
+!
+hostname dc01-pod01-spine01
+!
+spanning-tree mode mstp
+!
+interface Ethernet1
+   description =LINK-TO_LEAF01=
+   no switchport
+   ip address 10.11.3.0/31
+   bfd interval 700 min-rx 500 multiplier 3
+   no ip ospf neighbor bfd
+   no isis bfd
+!
+interface Ethernet2
+   description =LINK-TO_LEAF02=
+   no switchport
+   ip address 10.11.3.2/31
+   bfd interval 700 min-rx 500 multiplier 3
+   no ip ospf neighbor bfd
+   no isis bfd
+!
+interface Ethernet3
+   description =LINK_TO_LEAF03=
+   no switchport
+   ip address 10.11.3.4/31
+   bfd interval 700 min-rx 500 multiplier 3
+   no ip ospf neighbor bfd
+   no isis bfd
+!
+interface Ethernet4
+   description =LINK-TO_LEAF04=
+   no switchport
+   ip address 10.11.3.6/31
+   bfd interval 700 min-rx 500 multiplier 3
+   no ip ospf neighbor bfd
+   no isis bfd
+!
+interface Ethernet5
+   description =LINK-TO_SLEAF01=
+   no switchport
+   ip address 10.11.3.8/31
+   bfd interval 700 min-rx 500 multiplier 3
+   no ip ospf neighbor bfd
+   no isis bfd
+!
+interface Ethernet6
+   description =LINK-TO_SLEAF02=
+   no switchport
+   ip address 10.11.3.10/31
+   bfd interval 700 min-rx 500 multiplier 3
+   no ip ospf neighbor bfd
+   no isis bfd
+!
+interface Ethernet7
+   description =LINK-TO_BLEAF01=
+   no switchport
+   ip address 10.11.3.12/31
+   bfd interval 700 min-rx 500 multiplier 3
+   no ip ospf neighbor bfd
+   no isis bfd
+!
+interface Ethernet8
+   description =LINK_TO_BLEAF02=
+   no switchport
+   ip address 10.11.3.14/31
+   bfd interval 700 min-rx 500 multiplier 3
+   no ip ospf neighbor bfd
+   no isis bfd
+!
+interface Ethernet9
+   description =LINK-TO_BGW01=
+   no switchport
+   ip address 10.11.3.16/31
+   bfd interval 700 min-rx 500 multiplier 3
+   no ip ospf neighbor bfd
+   no isis bfd
+!
+interface Ethernet10
+   description =LINK_TO_BGW02=
+   no switchport
+   ip address 10.11.3.18/31
+   bfd interval 700 min-rx 500 multiplier 3
+   no ip ospf neighbor bfd
+   no isis bfd
+!
+interface Ethernet11
+!
+interface Loopback1
+   ip address 10.11.1.1/32
+!
+interface Management1
+!
+ip routing
+!
+ip prefix-list PL_1
+   seq 10 permit 10.11.1.0/24 le 32
+   seq 20 permit 10.11.3.0/24 le 32
+!
+route-map MAP_1 permit 10
+   match ip address prefix-list PL_1
+!
+router bgp 4259840001
+   router-id 10.11.1.1
+   graceful-restart restart-time 300
+   maximum-paths 2
+   neighbor 10.11.3.1 remote-as 4259905000
+   neighbor 10.11.3.1 bfd
+   neighbor 10.11.3.1 description LEAF01
+   neighbor 10.11.3.1 route-map MAP_1 in
+   neighbor 10.11.3.1 password 7 m3FjC6w2d6o=
+   neighbor 10.11.3.3 remote-as 4259905001
+   neighbor 10.11.3.3 bfd
+   neighbor 10.11.3.3 description LEAF02
+   neighbor 10.11.3.3 route-map MAP_1 in
+   neighbor 10.11.3.3 password 7 kZcBlBo8kLo=
+   neighbor 10.11.3.5 remote-as 4259905002
+   neighbor 10.11.3.5 bfd
+   neighbor 10.11.3.5 description LEAF03
+   neighbor 10.11.3.5 route-map MAP_1 in
+   neighbor 10.11.3.5 password 7 kGZWqyCmNl4=
+   neighbor 10.11.3.7 remote-as 4259905003
+   neighbor 10.11.3.7 bfd
+   neighbor 10.11.3.7 description LEAF04
+   neighbor 10.11.3.7 route-map MAP_1 in
+   neighbor 10.11.3.7 password 7 JVIkOCtPnDM=
+   neighbor 10.11.3.9 remote-as 4259905101
+   neighbor 10.11.3.9 bfd
+   neighbor 10.11.3.9 description SLEAF01
+   neighbor 10.11.3.9 route-map MAP_1 in
+   neighbor 10.11.3.9 password 7 mGBWW5zgOEE=
+   neighbor 10.11.3.11 remote-as 4259905102
+   neighbor 10.11.3.11 bfd
+   neighbor 10.11.3.11 description SLEAF02
+   neighbor 10.11.3.11 route-map MAP_1 in
+   neighbor 10.11.3.11 password 7 jSSRC/e2y7E=
+   neighbor 10.11.3.13 remote-as 4259905201
+   neighbor 10.11.3.13 bfd
+   neighbor 10.11.3.13 description BLEAF01
+   neighbor 10.11.3.13 route-map MAP_1 in
+   neighbor 10.11.3.13 password 7 IVk4JXzOQBg=
+   neighbor 10.11.3.15 remote-as 4259905202
+   neighbor 10.11.3.15 bfd
+   neighbor 10.11.3.15 description BLEAF02
+   neighbor 10.11.3.15 route-map MAP_1 in
+   neighbor 10.11.3.15 password 7 7aYBVA/JiU8=
+   neighbor 10.11.3.17 remote-as 4259905301
+   neighbor 10.11.3.17 bfd
+   neighbor 10.11.3.17 description BGW01
+   neighbor 10.11.3.17 route-map MAP_1 in
+   neighbor 10.11.3.17 password 7 e01wILS8YqY=
+   neighbor 10.11.3.19 remote-as 4259905302
+   neighbor 10.11.3.19 bfd
+   neighbor 10.11.3.19 description BGW02
+   neighbor 10.11.3.19 route-map MAP_1 in
+   neighbor 10.11.3.19 password 7 hBf7gSNWhXU=
+   network 10.11.1.1/32
+   network 10.11.3.0/24
+   !
+   address-family ipv4
+      graceful-restart
+!
+end

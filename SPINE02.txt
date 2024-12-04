@@ -1,0 +1,173 @@
+dc01-pod01-spine02#show running-config
+! Command: show running-config
+! device: dc01-pod01-spine02 (vEOS-lab, EOS-4.29.2F)
+!
+! boot system flash:/vEOS-lab.swi
+!
+no aaa root
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model ribd
+!
+hostname dc01-pod01-spine02
+!
+spanning-tree mode mstp
+!
+interface Ethernet1
+   description =LINK-TO_LEAF01=
+   no switchport
+   ip address 10.11.3.40/31
+   bfd interval 700 min-rx 500 multiplier 3
+   no ip ospf neighbor bfd
+   no isis bfd
+!
+interface Ethernet2
+   description =LINK_TO_LEAF02=
+   no switchport
+   ip address 10.11.3.42/31
+   bfd interval 700 min-rx 500 multiplier 3
+   no ip ospf neighbor bfd
+   no isis bfd
+!
+interface Ethernet3
+   description =LINK_TO_LEAF03=
+   no switchport
+   ip address 10.11.3.44/31
+   bfd interval 700 min-rx 500 multiplier 3
+   no ip ospf neighbor bfd
+   no isis bfd
+!
+interface Ethernet4
+   description =LINK_TO_LEAF04=
+   no switchport
+   ip address 10.11.3.46/31
+   bfd interval 700 min-rx 500 multiplier 3
+   no ip ospf neighbor bfd
+   no isis bfd
+!
+interface Ethernet5
+   description =LINK_TO_SLEAF01=
+   no switchport
+   ip address 10.11.3.48/31
+   bfd interval 700 min-rx 500 multiplier 3
+   no ip ospf neighbor bfd
+   no isis bfd
+!
+interface Ethernet6
+   description =LINK_TO_SLEAF02=
+   no switchport
+   ip address 10.11.3.50/31
+   bfd interval 700 min-rx 500 multiplier 3
+   no ip ospf neighbor bfd
+   no isis bfd
+!
+interface Ethernet7
+   description =LINK_TO_BLEAF01=
+   no switchport
+   ip address 10.11.3.52/31
+   bfd interval 700 min-rx 500 multiplier 3
+   no ip ospf neighbor bfd
+   no isis bfd
+!
+interface Ethernet8
+   description =LINK_TO_BLEAF02=
+   no switchport
+   ip address 10.11.3.54/31
+   bfd interval 700 min-rx 500 multiplier 3
+   no ip ospf neighbor bfd
+   no isis bfd
+!
+interface Ethernet9
+   description =LINK_TO_BGW01=
+   no switchport
+   ip address 10.11.3.56/31
+   bfd interval 700 min-rx 500 multiplier 3
+   no ip ospf neighbor bfd
+   no isis bfd
+!
+interface Ethernet10
+   description =LINK_TO_BGW02=
+   no switchport
+   ip address 10.11.3.58/31
+   bfd interval 700 min-rx 500 multiplier 3
+   no ip ospf neighbor bfd
+   no isis bfd
+!
+interface Ethernet11
+!
+interface Loopback1
+   ip address 10.11.1.2/32
+!
+interface Management1
+!
+ip routing
+!
+ip prefix-list PL_1
+   seq 10 permit 10.11.1.0/24 le 32
+   seq 20 permit 10.11.3.0/24 le 32
+!
+route-map MAP_1 permit 10
+   match ip address prefix-list PL_1
+!
+router bgp 4259840002
+   router-id 10.11.1.2
+   graceful-restart restart-time 300
+   maximum-paths 2
+   neighbor 10.11.3.41 remote-as 4259905000
+   neighbor 10.11.3.41 bfd
+   neighbor 10.11.3.41 description LEAF01
+   neighbor 10.11.3.41 route-map MAP_1 in
+   neighbor 10.11.3.41 password 7 X1D+FhPL62M=
+   neighbor 10.11.3.43 remote-as 4259905001
+   neighbor 10.11.3.43 bfd
+   neighbor 10.11.3.43 description LEAF02
+   neighbor 10.11.3.43 route-map MAP_1 in
+   neighbor 10.11.3.43 password 7 v+YQEIAfTLQ=
+   neighbor 10.11.3.45 remote-as 4259905002
+   neighbor 10.11.3.45 bfd
+   neighbor 10.11.3.45 description LEAF03
+   neighbor 10.11.3.45 route-map MAP_1 in
+   neighbor 10.11.3.45 password 7 48bUQaGsEyA=
+   neighbor 10.11.3.47 remote-as 4259905003
+   neighbor 10.11.3.47 bfd
+   neighbor 10.11.3.47 description LEAF04
+   neighbor 10.11.3.47 route-map MAP_1 in
+   neighbor 10.11.3.47 password 7 2L3nuAWmD7Y=
+   neighbor 10.11.3.49 remote-as 4259905101
+   neighbor 10.11.3.49 bfd
+   neighbor 10.11.3.49 description SLEAF01
+   neighbor 10.11.3.49 route-map MAP_1 in
+   neighbor 10.11.3.49 password 7 69qWpBfLKT0=
+   neighbor 10.11.3.51 remote-as 4259905102
+   neighbor 10.11.3.51 bfd
+   neighbor 10.11.3.51 description SLEAF02
+   neighbor 10.11.3.51 route-map MAP_1 in
+   neighbor 10.11.3.51 password 7 X1D+FhPL62M=
+   neighbor 10.11.3.53 remote-as 4259905201
+   neighbor 10.11.3.53 bfd
+   neighbor 10.11.3.53 description BLEAF01
+   neighbor 10.11.3.53 route-map MAP_1 in
+   neighbor 10.11.3.53 password 7 v+YQEIAfTLQ=
+   neighbor 10.11.3.55 remote-as 4259905202
+   neighbor 10.11.3.55 bfd
+   neighbor 10.11.3.55 description BLEAF02
+   neighbor 10.11.3.55 route-map MAP_1 in
+   neighbor 10.11.3.55 password 7 48bUQaGsEyA=
+   neighbor 10.11.3.57 remote-as 4259905301
+   neighbor 10.11.3.57 bfd
+   neighbor 10.11.3.57 description BGW01
+   neighbor 10.11.3.57 route-map MAP_1 in
+   neighbor 10.11.3.57 password 7 2L3nuAWmD7Y=
+   neighbor 10.11.3.59 remote-as 4259905302
+   neighbor 10.11.3.59 bfd
+   neighbor 10.11.3.59 description BGW02
+   neighbor 10.11.3.59 route-map MAP_1 in
+   neighbor 10.11.3.59 password 7 69qWpBfLKT0=
+   network 10.11.1.2/32
+   network 10.11.3.0/24
+   !
+   address-family ipv4
+      graceful-restart
+!
+end
