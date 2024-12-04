@@ -9,7 +9,7 @@
 Описаны в документе: [README.md](README.md)
 
 ### Итоговая схема
-![ISIS_Topology_L1_L2.png](ISIS_Topology_L1_L2.png)
+![Topology_eBGP.png](Topology_eBGP.png)
 
 ## Конфигурации устройств:
 
