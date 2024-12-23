@@ -88,143 +88,209 @@ Neighbor Status Codes: m - Under maintenance
 |           |BGW01_Lo1  |10.11.1.11|4  |4259905301|0      |0  |0   |0      |01:05:41|Active|      |       |
 |           |BGW02_Lo1  |10.11.1.12|4  |4259905302|0      |0  |0   |0      |01:05:38|Active|      |       |
 
+##### dc01-pod01-leaf01
+dc01-pod01-leaf01#show bgp evpn summary
+BGP summary information for VRF default
+Router identifier 10.11.1.3, local AS number 4259905000
+Neighbor Status Codes: m - Under maintenance
 
-## Смотрим таблицы маршрутизации:
+|      |Description|Neighbor |V  |AS        |MsgRcvd|MsgSent|InQ|OutQ|Up/Down |State|PfxRcd|PfxAcc|
+|------|-----------|---------|---|----------|-------|-------|---|----|--------|-----|------|------|
+|      |SPINE01_Lo1|10.11.1.1|4  |4259840001|137    |109    |0  |0   |00:30:55|Estab|1     |1     |
+|      |SPINE02_Lo1|10.11.1.2|4  |4259840002|109    |110    |0  |0   |00:38:18|Estab|1     |1     |
 
-#### dc01-pod01-spine01#
+##### dc01-pod01-leaf02
+dc01-pod01-leaf02#show bgp evpn summary
+BGP summary information for VRF default
+Router identifier 10.11.1.4, local AS number 4259905001
+Neighbor Status Codes: m - Under maintenance
 
-dc01-pod01-spine01#show ip route
+|      |Description|Neighbor |V  |AS        |MsgRcvd|MsgSent|InQ|OutQ|Up/Down |State|PfxRcd|PfxAcc|
+|------|-----------|---------|---|----------|-------|-------|---|----|--------|-----|------|------|
+|      |SPINE01_Lo1|10.11.1.1|4  |4259840001|227    |231    |0  |0   |00:40:57|Estab|2     |2     |
+|      |SPINE02_Lo1|10.11.1.2|4  |4259840002|196    |194    |0  |0   |00:40:48|Estab|2     |2     |
 
-VRF: default
-Codes: C - connected, S - static, K - kernel,
-       O - OSPF, IA - OSPF inter area, E1 - OSPF external type 1,
-       E2 - OSPF external type 2, N1 - OSPF NSSA external type 1,
-       N2 - OSPF NSSA external type2, B - Other BGP Routes,
-       B I - iBGP, B E - eBGP, R - RIP, I L1 - IS-IS level 1,
-       I L2 - IS-IS level 2, O3 - OSPFv3, A B - BGP Aggregate,
-       A O - OSPF Summary, NG - Nexthop Group Static Route,
-       V - VXLAN Control Service, M - Martian,
-       DH - DHCP client installed default route,
-       DP - Dynamic Policy Route, L - VRF Leaked,
-       G  - gRIBI, RC - Route Cache Route
+##### dc01-pod01-leaf03
+dc01-pod01-leaf03#show bgp evpn summary
+BGP summary information for VRF default
+Router identifier 10.11.1.5, local AS number 4259905002
+Neighbor Status Codes: m - Under maintenance
 
-Gateway of last resort is not set
+|      |Description|Neighbor |V  |AS        |MsgRcvd|MsgSent|InQ|OutQ|Up/Down |State|PfxRcd|PfxAcc|
+|------|-----------|---------|---|----------|-------|-------|---|----|--------|-----|------|------|
+|      |SPINE01_Lo1|10.11.1.1|4  |4259840001|279    |246    |0  |0   |00:41:51|Estab|1     |1     |
+|      |SPINE02_Lo1|10.11.1.2|4  |4259840002|266    |220    |0  |0   |00:41:58|Estab|1     |1     |
 
-|C        10.11.1.1/32 is directly connected   |Loopback1  |
-|----------------------------------------------|-----------|
-| B E      10.11.1.2/32 [200/0] via 10.11.3.3  | Ethernet2 |
-|                               via 10.11.3.13 | Ethernet7 |
-| B E      10.11.1.3/32 [200/0] via 10.11.3.1  | Ethernet1 |
-| B E      10.11.1.4/32 [200/0] via 10.11.3.3  | Ethernet2 |
-| B E      10.11.1.5/32 [200/0] via 10.11.3.5  | Ethernet3 |
-| B E      10.11.1.6/32 [200/0] via 10.11.3.7  | Ethernet4 |
-| B E      10.11.1.7/32 [200/0] via 10.11.3.9  | Ethernet5 |
-| B E      10.11.1.8/32 [200/0] via 10.11.3.11 | Ethernet6 |
-| B E      10.11.1.9/32 [200/0] via 10.11.3.13 | Ethernet7 |
-| B E      10.11.1.10/32 [200/0] via 10.11.3.15| Ethernet8 |
-| B E      10.11.1.11/32 [200/0] via 10.11.3.17| Ethernet9 |
-| B E      10.11.1.12/32 [200/0] via 10.11.3.19| Ethernet10|
-| C        10.11.3.0/31 is directly connected  | Ethernet1 |
-| C        10.11.3.2/31 is directly connected  | Ethernet2 |
-| C        10.11.3.4/31 is directly connected  | Ethernet3 |
-| C        10.11.3.6/31 is directly connected  | Ethernet4 |
-| C        10.11.3.8/31 is directly connected  | Ethernet5 |
-| C        10.11.3.10/31 is directly connected | Ethernet6 |
-| C        10.11.3.12/31 is directly connected | Ethernet7 |
-| C        10.11.3.14/31 is directly connected | Ethernet8 |
-| C        10.11.3.16/31 is directly connected | Ethernet9 |
-| C        10.11.3.18/31 is directly connected | Ethernet10|
-| B E      10.11.3.40/31 [200/0] via 10.11.3.1 | Ethernet1 |
-| B E      10.11.3.42/31 [200/0] via 10.11.3.3 | Ethernet2 |
-| B E      10.11.3.44/31 [200/0] via 10.11.3.5 | Ethernet3 |
-| B E      10.11.3.46/31 [200/0] via 10.11.3.7 | Ethernet4 |
-| B E      10.11.3.48/31 [200/0] via 10.11.3.9 | Ethernet5 |
-| B E      10.11.3.50/31 [200/0] via 10.11.3.11| Ethernet6 |
-| B E      10.11.3.52/31 [200/0] via 10.11.3.13| Ethernet7 |
-| B E      10.11.3.54/31 [200/0] via 10.11.3.15| Ethernet8 |
-| B E      10.11.3.56/31 [200/0] via 10.11.3.17| Ethernet9 |
-| B E      10.11.3.58/31 [200/0] via 10.11.3.19| Ethernet10|
+##### dc01-pod01-leaf04
+dc01-pod01-leaf04#show bgp evpn summary
+BGP summary information for VRF default
+Router identifier 10.11.1.6, local AS number 4259905003
+Neighbor Status Codes: m - Under maintenance
 
+|      |Description|Neighbor |V  |AS        |MsgRcvd|MsgSent|InQ|OutQ|Up/Down |State|PfxRcd|PfxAcc|
+|------|-----------|---------|---|----------|-------|-------|---|----|--------|-----|------|------|
+|      |SPINE01_Lo1|10.11.1.1|4  |4259840001|269    |247    |0  |0   |00:42:47|Estab|2     |2     |
+|      |SPINE02_Lo1|10.11.1.2|4  |4259840002|207    |197    |0  |0   |00:43:10|Estab|2     |2     |
 
-#### dc01-pod01-spine02#
+##### dc01-pod01-Sleaf01
+dc01-pod01-Sleaf01#show bgp evpn summary
+BGP summary information for VRF default
+Router identifier 10.11.1.7, local AS number 4259905101
+Neighbor Status Codes: m - Under maintenance
 
-dc01-pod01-spine02#show ip route
+|      |Description|Neighbor |V  |AS        |MsgRcvd|MsgSent|InQ|OutQ|Up/Down |State|PfxRcd|PfxAcc|
+|------|-----------|---------|---|----------|-------|-------|---|----|--------|-----|------|------|
+|      |SPINE01_Lo1|10.11.1.1|4  |4259840001|169    |192    |0  |0   |00:43:15|Estab|2     |2     |
+|      |SPINE02_Lo1|10.11.1.2|4  |4259840002|151    |189    |0  |0   |00:43:05|Estab|2     |2     |
 
-VRF: default
-Codes: C - connected, S - static, K - kernel,
-       O - OSPF, IA - OSPF inter area, E1 - OSPF external type 1,
-       E2 - OSPF external type 2, N1 - OSPF NSSA external type 1,
-       N2 - OSPF NSSA external type2, B - Other BGP Routes,
-       B I - iBGP, B E - eBGP, R - RIP, I L1 - IS-IS level 1,
-       I L2 - IS-IS level 2, O3 - OSPFv3, A B - BGP Aggregate,
-       A O - OSPF Summary, NG - Nexthop Group Static Route,
-       V - VXLAN Control Service, M - Martian,
-       DH - DHCP client installed default route,
-       DP - Dynamic Policy Route, L - VRF Leaked,
-       G  - gRIBI, RC - Route Cache Route
+##### dc01-pod01-Sleaf02
+dc01-pod01-Sleaf02#show bgp evpn summary
+BGP summary information for VRF default
+Router identifier 10.11.1.8, local AS number 4259905102
+Neighbor Status Codes: m - Under maintenance
 
-Gateway of last resort is not set
+|      |Description|Neighbor |V  |AS        |MsgRcvd|MsgSent|InQ|OutQ|Up/Down |State|PfxRcd|PfxAcc|
+|------|-----------|---------|---|----------|-------|-------|---|----|--------|-----|------|------|
+|      |SPINE01_Lo1|10.11.1.1|4  |4259840001|214    |194    |0  |0   |00:44:17|Estab|2     |2     |
+|      |SPINE02_Lo1|10.11.1.2|4  |4259840002|252    |181    |0  |0   |00:43:53|Estab|2     |2     |
+  
 
-|B E      10.11.1.1/32 [200/0] via 10.11.3.43  |Ethernet2  |
-|----------------------------------------------|-----------|
-|                               via 10.11.3.53 | Ethernet7 |
-| C        10.11.1.2/32 is directly connected  | Loopback1 |
-| B E      10.11.1.3/32 [200/0] via 10.11.3.41 | Ethernet1 |
-| B E      10.11.1.4/32 [200/0] via 10.11.3.43 | Ethernet2 |
-| B E      10.11.1.5/32 [200/0] via 10.11.3.45 | Ethernet3 |
-| B E      10.11.1.6/32 [200/0] via 10.11.3.47 | Ethernet4 |
-| B E      10.11.1.7/32 [200/0] via 10.11.3.49 | Ethernet5 |
-| B E      10.11.1.8/32 [200/0] via 10.11.3.51 | Ethernet6 |
-| B E      10.11.1.9/32 [200/0] via 10.11.3.53 | Ethernet7 |
-| B E      10.11.1.10/32 [200/0] via 10.11.3.55| Ethernet8 |
-| B E      10.11.1.11/32 [200/0] via 10.11.3.57| Ethernet9 |
-| B E      10.11.1.12/32 [200/0] via 10.11.3.59| Ethernet10|
-| B E      10.11.3.0/31 [200/0] via 10.11.3.41 | Ethernet1 |
-| B E      10.11.3.2/31 [200/0] via 10.11.3.43 | Ethernet2 |
-| B E      10.11.3.4/31 [200/0] via 10.11.3.45 | Ethernet3 |
-| B E      10.11.3.6/31 [200/0] via 10.11.3.47 | Ethernet4 |
-| B E      10.11.3.8/31 [200/0] via 10.11.3.49 | Ethernet5 |
-| B E      10.11.3.10/31 [200/0] via 10.11.3.51| Ethernet6 |
-| B E      10.11.3.12/31 [200/0] via 10.11.3.53| Ethernet7 |
-| B E      10.11.3.14/31 [200/0] via 10.11.3.55| Ethernet8 |
-| B E      10.11.3.16/31 [200/0] via 10.11.3.57| Ethernet9 |
-| B E      10.11.3.18/31 [200/0] via 10.11.3.59| Ethernet10|
-| C        10.11.3.40/31 is directly connected | Ethernet1 |
-| C        10.11.3.42/31 is directly connected | Ethernet2 |
-| C        10.11.3.44/31 is directly connected | Ethernet3 |
-| C        10.11.3.46/31 is directly connected | Ethernet4 |
-| C        10.11.3.48/31 is directly connected | Ethernet5 |
-| C        10.11.3.50/31 is directly connected | Ethernet6 |
-| C        10.11.3.52/31 is directly connected | Ethernet7 |
-| C        10.11.3.54/31 is directly connected | Ethernet8 |
-| C        10.11.3.56/31 is directly connected | Ethernet9 |
-| C        10.11.3.58/31 is directly connected | Ethernet10|
+##### dc01-pod01-leaf01#show interfaces vxlan 1
+
+|Vxlan1 is up                                                    |line protocol is up (connected)|
+|----------------------------------------------------------------|-------------------------------|
+|  Hardware is Vxlan                                             |                               |
+|  Description: =VXLAN=                                          |                               |
+|  Source interface is Loopback2 and is active with 10.11.2.3    |                               |
+|  Listening on UDP port 4789                                    |                               |
+|  Replication/Flood Mode is headend with Flood List Source: EVPN|                               |
+|  Remote MAC learning via EVPN                                  |                               |
+|  VNI mapping to VLANs                                          |                               |
+|  Static VLAN to VNI mapping is                                 |                               |
+|    [10                                                         | 100010]                       |
+|  Note: All Dynamic VLANs used by VCS are internal VLANs.       |                               |
+|        Use 'show vxlan vni' for details.                       |                               |
+|  Static VRF to VNI mapping is not configured                   |                               |
+|  Headend replication flood vtep list is:                       |                               |
+|    10 10.11.2.5                                                |                               |
+|  Shared Router MAC is 0000.0000.0000                           |                               |
+
+##### dc01-pod01-leaf03#show interfaces vxlan 1
+
+|Vxlan1 is up                                                    |line protocol is up (connected)|
+|----------------------------------------------------------------|-------------------------------|
+|  Hardware is Vxlan                                             |                               |
+|  Description: =VXLAN=                                          |                               |
+|  Source interface is Loopback2 and is active with 10.11.2.5    |                               |
+|  Listening on UDP port 4789                                    |                               |
+|  Replication/Flood Mode is headend with Flood List Source: EVPN|                               |
+|  Remote MAC learning via EVPN                                  |                               |
+|  VNI mapping to VLANs                                          |                               |
+|  Static VLAN to VNI mapping is                                 |                               |
+|    [10                                                         | 100010]                       |
+|  Note: All Dynamic VLANs used by VCS are internal VLANs.       |                               |
+|        Use 'show vxlan vni' for details.                       |                               |
+|  Static VRF to VNI mapping is not configured                   |                               |
+|  Headend replication flood vtep list is:                       |                               |
+|    10 10.11.2.3                                                |                               |
+|  Shared Router MAC is 0000.0000.0000                           |                               |
+
+##### dc01-pod01-leaf01#show vxlan vtep
+
+|Remote VTEPS for Vxlan1|              |
+|-----------------------|--------------|
+|VTEP            Tunnel Type(s)|              |
+|--------------- --------------|              |
+|10.11.2.5       flood  |              |
+|Total number of remote VTEPS|  1           |
 
 
-## Проверяем доступность loopback1 SPINE02 c SPINE01:
+##### dc01-pod01-leaf03#show vxlan vtep
 
-dc01-pod01-spine01#ping 10.11.1.2
-PING 10.11.1.2 (10.11.1.2) 72(100) bytes of data.
-80 bytes from 10.11.1.2: icmp_seq=1 ttl=63 time=102 ms
-80 bytes from 10.11.1.2: icmp_seq=2 ttl=63 time=115 ms
-80 bytes from 10.11.1.2: icmp_seq=3 ttl=63 time=110 ms
-80 bytes from 10.11.1.2: icmp_seq=4 ttl=63 time=102 ms
-80 bytes from 10.11.1.2: icmp_seq=5 ttl=63 time=62.5 ms
+|Remote VTEPS for Vxlan1       |      |
+|------------------------------|------|
+|VTEP            Tunnel Type(s)|      |
+|--------------- --------------|      |
+|10.11.2.5       flood         |      |
+|Total number of remote VTEPS  |  1   |
 
---- 10.11.1.2 ping statistics ---
-5 packets transmitted, 5 received, 0% packet loss, time 89ms
-rtt min/avg/max/mdev = 62.520/98.690/115.708/18.801 ms, pipe 5, ipg/ewma 22.346/99.234 ms
 
-## Проверяем доступность loopback1 LEAF04 c SPINE01:
+#### dc01-pod01-leaf03#
+show mac address-table
 
-dc01-pod01-spine01#ping 10.11.1.6
-PING 10.11.1.6 (10.11.1.6) 72(100) bytes of data.
-80 bytes from 10.11.1.6: icmp_seq=1 ttl=64 time=17.1 ms
-80 bytes from 10.11.1.6: icmp_seq=2 ttl=64 time=21.7 ms
-80 bytes from 10.11.1.6: icmp_seq=3 ttl=64 time=16.8 ms
-80 bytes from 10.11.1.6: icmp_seq=4 ttl=64 time=10.4 ms
-80 bytes from 10.11.1.6: icmp_seq=5 ttl=64 time=11.3 ms
+|------------------------------------------------------------------  |
+|--------------------------------------------------------------------|
+|Vlan    Mac Address       Type        Ports      Moves   Last Move  |
+|----    -----------       ----        -----      -----   ---------  |
+|   1    0000.0000.0010    STATIC      Cpu                           |
+|  10    0000.0000.0010    STATIC      Cpu                           |
+|  10    0050.7966.6812    DYNAMIC     Vx1        1       0:00:22 ago|
+|  10    0050.7966.6815    DYNAMIC     Et3        1       0:00:23 ago|
+|Total Mac Addresses for this criterion: 4                           |
+|          Multicast Mac Address Table                               |
+|------------------------------------------------------------------  |
+|Vlan    Mac Address       Type        Ports                         |
+|----    -----------       ----        -----                         |
+|Total Mac Addresses for this criterion: 0                           |
 
---- 10.11.1.6 ping statistics ---
-5 packets transmitted, 5 received, 0% packet loss, time 76ms
-rtt min/avg/max/mdev = 10.409/15.500/21.762/4.175 ms, pipe 2, ipg/ewma 19.143/16.042 ms
+
+#### dc01-pod01-leaf01
+#show vxlan address-table
+
+|----------------------------------------------------------------------   |
+|-------------------------------------------------------------------------|
+|VLAN  Mac Address     Type      Prt  VTEP             Moves   Last Move  |
+|----  -----------     ----      ---  ----             -----   ---------  |
+|  10  0050.7966.6815  EVPN      Vx1  10.11.2.5        1       0:01:40 ago|
+|Total Remote Mac Addresses for this criterion: 1                         |
+
+
+#### dc01-pod01-leaf01# show bgp evpn route-type mac-ip
+BGP routing table information for VRF default
+Router identifier 10.11.1.3, local AS number 4259905000
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+|      |Network  |Next|Hop|Metric      |LocPref   |Weight        |Path|
+|------|---------|----|---|------------|----------|--------------|----|
+|      |*        |>   |RD:|10.11.1.3:10|mac-ip    |0050.7966.6812|    |
+|      |-        |-   |-  |0           |i         |              |    |
+|      |*        |>Ec |RD:|10.11.1.5:10|mac-ip    |0050.7966.6815|    |
+|      |10.11.2.5|-   |100|0           |4259840002|4259905002    |i   |
+|      |*        |ec  |RD:|10.11.1.5:10|mac-ip    |0050.7966.6815|    |
+|      |10.11.2.5|-   |100|0           |4259840001|4259905002    |i   |
+
+#### dc01-pod01-leaf03#show bgp evpn route-type mac-ip
+BGP routing table information for VRF default
+Router identifier 10.11.1.5, local AS number 4259905002
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+|      |Network  |Next|Hop|Metric      |LocPref   |Weight        |Path|
+|------|---------|----|---|------------|----------|--------------|----|
+|      |*        |>Ec |RD:|10.11.1.3:10|mac-ip    |0050.7966.6812|    |
+|      |10.11.2.3|-   |100|0           |4259840001|4259905000    |i   |
+|      |*        |ec  |RD:|10.11.1.3:10|mac-ip    |0050.7966.6812|    |
+|      |10.11.2.3|-   |100|0           |4259840002|4259905000    |i   |
+|      |*        |>   |RD:|10.11.1.5:10|mac-ip    |0050.7966.6815|    |
+|      |-        |-   |-  |0           |i         |              |    |
+
+
+### Главный критерий - IP связность между хостами 10.88.88.3 и 10.88.88.5
+
+|VPCS>|ping |10.88.88.5|FIELD4    |FIELD5    |FIELD6|FIELD7      |FIELD8|
+|-----|-----|----------|----------|----------|------|------------|------|
+|84   |bytes|from      |10.88.88.5|icmp_seq=1|ttl=64|time=121.441|ms    |
+|84   |bytes|from      |10.88.88.5|icmp_seq=2|ttl=64|time=74.594 |ms    |
+|84   |bytes|from      |10.88.88.5|icmp_seq=3|ttl=64|time=46.078 |ms    |
+|84   |bytes|from      |10.88.88.5|icmp_seq=4|ttl=64|time=60.178 |ms    |
+|84   |bytes|from      |10.88.88.5|icmp_seq=5|ttl=64|time=186.543|ms    |
+
+
+### Как и ожидалось отключение IP адреса на VLAN интерфейсе на связность не влияет.  Его можно вообще не настраивать
+
+###  Далее для VLAN 10 (VNI 10010) был настроен AnyCast GW. (виртуальный IP и виртуальный MAC)
