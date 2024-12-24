@@ -1,0 +1,119 @@
+dc01-pod01-leaf02#show running-config
+
+! Command: show running-config
+! device: dc01-pod01-leaf02 (vEOS-lab, EOS-4.29.2F)
+!
+! boot system flash:/vEOS-lab.swi
+!
+no aaa root
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model multi-agent
+!
+hostname dc01-pod01-leaf02
+!
+spanning-tree mode mstp
+!
+interface Ethernet1
+   description =LINK_TO_SPINE01=
+   no switchport
+   ip address 10.11.3.3/31
+   bfd interval 700 min-rx 500 multiplier 3
+   no ip ospf neighbor bfd
+   no isis bfd
+!
+interface Ethernet2
+   description =LINK_TO_SPINE02=
+   no switchport
+   ip address 10.11.3.43/31
+   bfd interval 700 min-rx 500 multiplier 3
+   no ip ospf neighbor bfd
+   no isis bfd
+!
+interface Ethernet3
+!
+interface Ethernet4
+!
+interface Ethernet5
+!
+interface Ethernet6
+!
+interface Ethernet7
+!
+interface Ethernet8
+!
+interface Loopback1
+   ip address 10.11.1.4/32
+   ip ospf area 0.0.0.0
+!
+interface Loopback2
+   ip address 10.11.2.4/32
+!
+interface Management1
+!
+interface Vxlan1
+   description =VXLAN=
+   vxlan source-interface Loopback2
+   vxlan udp-port 4789
+   vxlan vlan 10 vni 100010
+   vxlan learn-restrict any
+!
+ip routing
+!
+ip prefix-list PL_1
+   seq 10 permit 10.11.1.0/24 le 32
+   seq 20 permit 10.11.3.0/24 le 32
+!
+route-map MAP_1 permit 10
+   match ip address prefix-list PL_1
+!
+router bgp 4259905001
+   router-id 10.11.1.4
+   graceful-restart restart-time 300
+   maximum-paths 4 ecmp 64
+   neighbor EVPN peer group
+   neighbor EVPN remote-as 4259840001
+   neighbor EVPN update-source Loopback1
+   neighbor EVPN ebgp-multihop 3
+   neighbor EVPN send-community extended
+   neighbor EVPN2 peer group
+   neighbor EVPN2 remote-as 4259840002
+   neighbor EVPN2 update-source Loopback1
+   neighbor EVPN2 ebgp-multihop 3
+   neighbor EVPN2 send-community extended
+   neighbor 10.11.1.1 peer group EVPN
+   neighbor 10.11.1.1 description SPINE01_Lo1
+   neighbor 10.11.1.2 peer group EVPN2
+   neighbor 10.11.1.2 description SPINE02_Lo1
+   neighbor 10.11.3.2 remote-as 4259840001
+   neighbor 10.11.3.2 bfd
+   neighbor 10.11.3.2 description SPINE01
+   neighbor 10.11.3.2 route-map MAP_1 in
+   neighbor 10.11.3.2 password 7 kZcBlBo8kLo=
+   neighbor 10.11.3.42 remote-as 4259840002
+   neighbor 10.11.3.42 bfd
+   neighbor 10.11.3.42 description SPINE02
+   neighbor 10.11.3.42 route-map MAP_1 in
+   neighbor 10.11.3.42 password 7 v+YQEIAfTLQ=
+   !
+   vlan 10
+      rd 65001:10010
+      route-target both 65001:65001
+      redistribute learned
+      redistribute static
+   !
+   address-family evpn
+      neighbor EVPN activate
+      neighbor EVPN2 activate
+   !
+   address-family ipv4
+      network 10.11.1.4/32
+      network 10.11.2.4/32
+      network 10.11.3.2/31
+      network 10.11.3.42/31
+      network 10.11.3.0/24
+      graceful-restart
+!
+end
+dc01-pod01-leaf02#
