@@ -66,9 +66,45 @@ interface Vlan20 <br>
 
 ## Подтверждение работоспособности Assimetric IRB
 
-Небольшая 
+Пингуем с интерфейса в VLAN20  c ip адресом 10.10.10.2 с LEAF01  адрес в VLAN 10 на LEAF03  10.88.88.3 <br>
 
+dc01-pod01-leaf01#ping 10.88.88.3 source 10.10.10.2 <br>
+PING 10.88.88.3 (10.88.88.3) from 10.10.10.2 : 72(100) bytes of data. <br>
+80 bytes from 10.88.88.3: icmp_seq=1 ttl=64 time=185 ms <br>
+80 bytes from 10.88.88.3: icmp_seq=2 ttl=64 time=446 ms <br>
+80 bytes from 10.88.88.3: icmp_seq=3 ttl=64 time=452 ms <br>
+80 bytes from 10.88.88.3: icmp_seq=4 ttl=64 time=460 ms <br>
+80 bytes from 10.88.88.3: icmp_seq=5 ttl=64 time=462 ms <br>
 
+--- 10.88.88.3 ping statistics --- <br>
+5 packets transmitted, 5 received, 0% packet loss, time 53ms <br>
+rtt min/avg/max/mdev = 185.248/401.526/462.780/108.302 ms, pipe 5, ipg/ewma 13.250/297.516 ms <br>
+dc01-pod01-leaf01#<br>
+
+Проверяем доступность с ПК, включенного в первый LEAF01 в VLAN 10 IP адресов на LEAF03 <br>
+<br>
+VPCS> ip 10.88.88.88/24 10.88.88.1 <br>
+Checking for duplicate address... <br>
+VPCS : 10.88.88.88 255.255.255.0 gateway 10.88.88.1 <br>
+<br>
+VPCS> <br>
+VPCS> ping 10.10.10.3<br>
+<br>
+84 bytes from 10.10.10.3 icmp_seq=1 ttl=64 time=67.369 ms <br>
+84 bytes from 10.10.10.3 icmp_seq=2 ttl=64 time=101.972 ms <br>
+84 bytes from 10.10.10.3 icmp_seq=3 ttl=64 time=212.186 ms <br> 
+84 bytes from 10.10.10.3 icmp_seq=4 ttl=64 time=57.238 ms <br>
+84 bytes from 10.10.10.3 icmp_seq=5 ttl=64 time=57.698 ms <br>
+
+Смотрим ARP таблицу на LEAF01: <br>
+
+dc01-pod01-leaf01#show ip arp <br>
+Address         Age (sec)  Hardware Addr   Interface <br>
+10.11.3.0         0:00:02  5000.00d7.ee0b  Ethernet1 <br>
+10.11.3.40        0:00:00  5000.00cb.38c2  Ethernet2 <br>
+10.88.88.3        0:17:51  5000.0015.f4e8  Vlan10, not learned <br>
+10.88.88.88       0:02:12  0050.7966.6812  Vlan10, Ethernet3 <br>
+10.10.10.3        0:18:15  5000.0015.f4e8  Vlan20, not learned <br>
 
 
 ## Подтверждение работоспособности L3VNI:
