@@ -1,5 +1,4 @@
 dc01-pod01-leaf02#show running-config
-
 ! Command: show running-config
 ! device: dc01-pod01-leaf02 (vEOS-lab, EOS-4.29.2F)
 !
@@ -11,9 +10,22 @@ transceiver qsfp default-mode 4x10G
 !
 service routing protocols model multi-agent
 !
+logging synchronous level critical
+!
 hostname dc01-pod01-leaf02
 !
 spanning-tree mode mstp
+!
+vlan 10
+   name -=VLAN_10=-
+!
+vlan 30
+   name =VLAN_30_Symmetric_IRB_SVI_L3VNI
+!
+vlan 40
+   name =VLAN_40_Symmetric_IRB_L3VNI=
+!
+vrf instance CUSTOMER_L3VNI
 !
 interface Ethernet1
    description =LINK_TO_SPINE01=
@@ -45,21 +57,39 @@ interface Ethernet8
 !
 interface Loopback1
    ip address 10.11.1.4/32
-   ip ospf area 0.0.0.0
 !
 interface Loopback2
    ip address 10.11.2.4/32
 !
 interface Management1
 !
+interface Vlan10
+   ip virtual-router address 10.88.88.1/24
+!
+interface Vlan30
+   vrf CUSTOMER_L3VNI
+   ip address 10.30.30.2/24
+   ip virtual-router address 10.30.30.1/24
+!
+interface Vlan40
+   vrf CUSTOMER_L3VNI
+   ip address 10.40.40.2/24
+   ip virtual-router address 10.40.40.1/24
+!
 interface Vxlan1
    description =VXLAN=
-   vxlan source-interface Loopback2
+   vxlan source-interface Loopback1
    vxlan udp-port 4789
    vxlan vlan 10 vni 100010
+   vxlan vlan 30 vni 100030
+   vxlan vlan 40 vni 100040
+   vxlan vrf CUSTOMER_L3VNI vni 1000777
    vxlan learn-restrict any
 !
+ip virtual-router mac-address 00:00:00:00:00:10
+!
 ip routing
+ip routing vrf CUSTOMER_L3VNI
 !
 ip prefix-list PL_1
    seq 10 permit 10.11.1.0/24 le 32
@@ -103,6 +133,18 @@ router bgp 4259905001
       redistribute learned
       redistribute static
    !
+   vlan 30
+      rd 65001:100030
+      route-target both 65001:30
+      redistribute learned
+      redistribute static
+   !
+   vlan 40
+      rd 65001:100040
+      route-target both 65001:40
+      redistribute learned
+      redistribute static
+   !
    address-family evpn
       neighbor EVPN activate
       neighbor EVPN2 activate
@@ -114,6 +156,12 @@ router bgp 4259905001
       network 10.11.3.42/31
       network 10.11.3.0/24
       graceful-restart
+   !
+   vrf CUSTOMER_L3VNI
+      rd 10.11.1.4:1
+      route-target import evpn 65000:1
+      route-target export evpn 65000:1
+      redistribute connected
 !
 end
 dc01-pod01-leaf02#

@@ -1,5 +1,4 @@
-dc01-pod01-leaf01# show running-config
-Dec 24 20:12:20 dc01-pod01-leaf01 Bgp: %BGP-3-NOTIFICATION: sent to neighbor 10.11.3.0 (VRF default AS 4259840001) 6/10 (Cease/BFD down <Hard Reset>) 0 bytes
+dc01-pod01-leaf01#show running-config
 ! Command: show running-config
 ! device: dc01-pod01-leaf01 (vEOS-lab, EOS-4.29.2F)
 !
@@ -11,12 +10,17 @@ transceiver qsfp default-mode 4x10G
 !
 service routing protocols model multi-agent
 !
+logging synchronous level critical
+!
 hostname dc01-pod01-leaf01
 !
 spanning-tree mode mstp
 !
 vlan 10
    name =VLAN_10_test=
+!
+vlan 20
+   name =VLAN20_Assimetric_IRB=
 !
 interface Ethernet1
    description =LINK-TO_SPINE01=
@@ -57,13 +61,19 @@ interface Loopback2
 interface Management1
 !
 interface Vlan10
+   ip address 10.88.88.2/24
    ip virtual-router address 10.88.88.1/24
+!
+interface Vlan20
+   ip address 10.10.10.2/24
+   ip virtual-router address 10.10.10.1/24
 !
 interface Vxlan1
    description =VXLAN=
-   vxlan source-interface Loopback2
+   vxlan source-interface Loopback1
    vxlan udp-port 4789
    vxlan vlan 10 vni 100010
+   vxlan vlan 20 vni 100020
    vxlan learn-restrict any
 !
 ip virtual-router mac-address 00:00:00:00:00:10
@@ -107,6 +117,12 @@ router bgp 4259905000
    neighbor 10.11.3.40 password 7 X1D+FhPL62M=
    !
    vlan 10
+      rd auto
+      route-target both 65001:65001
+      redistribute learned
+      redistribute static
+   !
+   vlan 20
       rd auto
       route-target both 65001:65001
       redistribute learned
