@@ -212,46 +212,183 @@ Address         Age (sec)  Hardware Addr   Interface <br>
 
 ## Подтверждение работоспособности L3VNI:
 
-### show bgp evpn summary
+### show vxlan vtep
 
-##### dc01-pod01-spine01
-dc01-pod01-spine01#show bgp evpn summary
-BGP summary information for VRF default
-Router identifier 10.11.1.1, local AS number 4259840001
-Neighbor Status Codes: m - Under maintenance
+dc01-pod01-leaf02#show vxlan vtep <br>
+Remote VTEPS for Vxlan1: <br>
+<br>
+VTEP            Tunnel Type(s) <br>
+--------------- -------------- <br>
+10.11.1.3       flood <br>
+10.11.1.5       flood <br>
+10.11.1.6       flood, unicast <br>
+10.11.2.3       flood <br>
+10.11.2.5       flood <br>
+<br>
+Total number of remote VTEPS:  5 <br>
 
-|      |Description|Neighbor  |V  |AS        |MsgRcvd|MsgSent|InQ|OutQ|Up/Down |State |PfxRcd|PfxAcc|
-|------|-----------|----------|---|----------|-------|-------|---|----|--------|------|------|------|
-|      |LEAF01_Lo1 |10.11.1.3 |4  |4259905000|89     |120    |0  |0   |00:27:41|Estab |2     |2     |
-|      |LEAF02_Lo1 |10.11.1.4 |4  |4259905001|177    |307    |0  |0   |00:36:26|Estab |1     |1     |
-|      |LEAF03_Lo1 |10.11.1.5 |4  |4259905002|164    |287    |0  |0   |00:36:17|Estab |2     |2     |
-|      |LEAF04_Lo1 |10.11.1.6 |4  |4259905003|192    |312    |0  |0   |00:36:15|Estab |1     |1     |
-|      |SLEAF01_Lo1|10.11.1.7 |4  |4259905101|146    |254    |0  |0   |00:35:43|Estab |1     |1     |
-|      |SLEAF02_Lo1|10.11.1.8 |4  |4259905102|145    |284    |0  |0   |00:36:07|Estab |1     |1     |
-|      |BLEAF01_Lo1|10.11.1.9 |4  |4259905201|0      |0      |0  |0   |00:57:45|Active|      |      |
-|      |BLEAF02_Lo1|10.11.1.10|4  |4259905202|0      |0      |0  |0   |00:57:45|Active|      |      |
-|      |BGW01_Lo1  |10.11.1.11|4  |4259905301|0      |0      |0  |0   |00:57:45|Active|      |      |
-|      |BGW02_Lo1  |10.11.1.12|4  |4259905302|0      |0      |0  |0   |00:57:44|Active|      |      |
+dc01-pod01-leaf04#show vxlan vtep  <br>
+VTEP            Tunnel Type(s)  <br>
+--------------- --------------  <br>
+10.11.1.4       unicast, flood  <br>
+ <br>
+Total number of remote VTEPS:  1  <br>
 
 
-##### dc01-pod01-spine02
-dc01-pod01-spine01#show bgp evpn summary
-BGP summary information for VRF default
-Router identifier 10.11.1.2, local AS number 4259840002
-Neighbor Status Codes: m - Under maintenance
+##### show bgp evpn route-type ip-prefix ipv4
 
-|Description|Neighbor   |V         |AS |MsgRcvd   |MsgSent|InQ|OutQ|Up/Down|State   |PfxRcd|PfxAcc|FIELD13|
-|-----------|-----------|----------|---|----------|-------|---|----|-------|--------|------|------|-------|
-|           |LEAF01_Lo1 |10.11.1.3 |4  |4259905000|109    |110|0   |0      |00:36:48|Estab |1     |1      |
-|           |LEAF02_Lo1 |10.11.1.4 |4  |4259905001|178    |209|0   |0      |00:38:02|Estab |1     |1      |
-|           |LEAF03_Lo1 |10.11.1.5 |4  |4259905002|192    |284|0   |0      |00:38:08|Estab |1     |1      |
-|           |LEAF04_Lo1 |10.11.1.6 |4  |4259905003|174    |220|0   |0      |00:38:21|Estab |1     |1      |
-|           |SLEAF01_Lo1|10.11.1.7 |4  |4259905101|165    |173|0   |0      |00:37:19|Estab |1     |1      |
-|           |SLEAF02_Lo1|10.11.1.8 |4  |4259905102|152    |259|0   |0      |00:37:18|Estab |1     |1      |
-|           |BLEAF01_Lo1|10.11.1.9 |4  |4259905201|0      |0  |0   |0      |01:05:39|Active|      |       |
-|           |BLEAF02_Lo1|10.11.1.10|4  |4259905202|0      |0  |0   |0      |01:05:39|Active|      |       |
-|           |BGW01_Lo1  |10.11.1.11|4  |4259905301|0      |0  |0   |0      |01:05:41|Active|      |       |
-|           |BGW02_Lo1  |10.11.1.12|4  |4259905302|0      |0  |0   |0      |01:05:38|Active|      |       |
+dc01-pod01-leaf02#show bgp evpn route-type ip-prefix ipv4 <br>
+BGP routing table information for VRF default <br>
+Router identifier 10.11.1.4, local AS number 4259905001 <br>
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP <br>
+                    c - Contributing to ECMP, % - Pending BGP convergence <br>
+Origin codes: i - IGP, e - EGP, ? - incomplete <br>
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop <br>
+ <br>
+          Network                Next Hop              Metric  LocPref Weight  Path <br>
+ * >      RD: 10.11.1.4:1 ip-prefix 10.30.30.0/24<br>
+                                 -                     -       -       0       i <br>
+ * >Ec    RD: 10.11.1.6:1 ip-prefix 10.30.30.0/24<br> 
+                                 10.11.1.6             -       100     0       4259840001 4259905003 i <br>
+ *  ec    RD: 10.11.1.6:1 ip-prefix 10.30.30.0/24<br> 
+                                 10.11.1.6             -       100     0       4259840002 4259905003 i <br>
+ * >      RD: 10.11.1.4:1 ip-prefix 10.40.40.0/24<br>  
+                                 -                     -       -       0       i <br>
+ * >Ec    RD: 10.11.1.6:1 ip-prefix 10.40.40.0/24<br> 
+                                 10.11.1.6             -       100     0       4259840001 4259905003 i <br>
+ *  ec    RD: 10.11.1.6:1 ip-prefix 10.40.40.0/24<br> 
+                                 10.11.1.6             -       100     0       4259840002 4259905003 i <br>
+<br>
+<br>
+dc01-pod01-leaf04#show bgp evpn route-type ip-prefix ipv4 <br>
+BGP routing table information for VRF default <br>
+Router identifier 10.11.1.6, local AS number 4259905003 <br>
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP <br>
+                    c - Contributing to ECMP, % - Pending BGP convergence <br>
+Origin codes: i - IGP, e - EGP, ? - incomplete <br>
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop <br>
+<br>
+          Network                Next Hop              Metric  LocPref Weight  Path <br>
+ * >Ec    RD: 10.11.1.4:1 ip-prefix 10.30.30.0/24<br>
+                                 10.11.1.4             -       100     0       4259840001 4259905001 i <br>
+ *  ec    RD: 10.11.1.4:1 ip-prefix 10.30.30.0/24 <br>
+                                 10.11.1.4             -       100     0       4259840002 4259905001 i <br>
+ * >      RD: 10.11.1.6:1 ip-prefix 10.30.30.0/24 <br>
+                                 -                     -       -       0       i <br>
+ * >Ec    RD: 10.11.1.4:1 ip-prefix 10.40.40.0/24<br>
+                                 10.11.1.4             -       100     0       4259840001 4259905001 i <br>
+ *  ec    RD: 10.11.1.4:1 ip-prefix 10.40.40.0/24 <br>
+                                 10.11.1.4             -       100     0       4259840002 4259905001 i <br>
+ * >      RD: 10.11.1.6:1 ip-prefix 10.40.40.0/24<br>
+                                 -                     -       -       0       i <br>
+
+#### Проверяем как были изучены сети: 
+
+dc01-pod01-leaf02#show ip route vrf  CUSTOMER_L3VNI <br>
+
+VRF: CUSTOMER_L3VNI <br>
+Codes: C - connected, S - static, K - kernel, <br>
+       O - OSPF, IA - OSPF inter area, E1 - OSPF external type 1, <br>
+       E2 - OSPF external type 2, N1 - OSPF NSSA external type 1, <br>
+       N2 - OSPF NSSA external type2, B - Other BGP Routes, <br>
+       B I - iBGP, B E - eBGP, R - RIP, I L1 - IS-IS level 1, <br>
+       I L2 - IS-IS level 2, O3 - OSPFv3, A B - BGP Aggregate, <br>
+       A O - OSPF Summary, NG - Nexthop Group Static Route, <br>
+       V - VXLAN Control Service, M - Martian, <br>
+       DH - DHCP client installed default route, <br>
+       DP - Dynamic Policy Route, L - VRF Leaked, <br>
+       G  - gRIBI, RC - Route Cache Route <br>
+
+Gateway of last resort is not set <br>
+
+ C        10.30.30.0/24 is directly connected, Vlan30 <br>
+ C        10.40.40.0/24 is directly connected, Vlan40 <br>
+
+### Убираем IP адреса с IN VLAN 40 чтобы убедиться, что L3VNI работает:
+
+dc01-pod01-leaf02#conf t <br>
+dc01-pod01-leaf02(config)#interface vlan 40 <br>
+dc01-pod01-leaf02(config-if-Vl40)#no ip address <br>
+dc01-pod01-leaf02(config-if-Vl40)#no ip virtual-router address <br>
+dc01-pod01-leaf02(config-if-Vl40)# <br>
+dc01-pod01-leaf02# <br>
+dc01-pod01-leaf02# <br>
+dc01-pod01-leaf02#show ip route vrf  CUSTOMER_L3VNI <br>
+<br>
+VRF: CUSTOMER_L3VNI  <br>
+Codes: C - connected, S - static, K - kernel, <br>
+       O - OSPF, IA - OSPF inter area, E1 - OSPF external type 1, <br>
+       E2 - OSPF external type 2, N1 - OSPF NSSA external type 1, <br>
+       N2 - OSPF NSSA external type2, B - Other BGP Routes, <br>
+       B I - iBGP, B E - eBGP, R - RIP, I L1 - IS-IS level 1, <br>
+       I L2 - IS-IS level 2, O3 - OSPFv3, A B - BGP Aggregate, <br>
+       A O - OSPF Summary, NG - Nexthop Group Static Route, <br>
+       V - VXLAN Control Service, M - Martian, <br>
+       DH - DHCP client installed default route, <br>
+       DP - Dynamic Policy Route, L - VRF Leaked, <br>
+       G  - gRIBI, RC - Route Cache Route <br>
+ <br>
+Gateway of last resort is not set <br>
+ <br>
+ C        10.30.30.0/24 is directly connected, Vlan30 <br>
+ B E      10.40.40.0/24 [200/0] via VTEP 10.11.1.6 VNI 1000777 router-mac 50:00:00:72:8b:31 local-interface Vxlan1 <br>
+
+ 
+
+#### Пинги с интерфейсов LEAF02 на интерфейсы LEAF04
+
+dc01-pod01-leaf02#ping vrf CUSTOMER_L3VNI 10.40.40.4 source 10.30.30.2 <br>
+PING 10.40.40.4 (10.40.40.4) from 10.30.30.2 : 72(100) bytes of data. <br>
+80 bytes from 10.40.40.4: icmp_seq=1 ttl=64 time=106 ms <br>
+80 bytes from 10.40.40.4: icmp_seq=2 ttl=64 time=96.7 ms <br>
+80 bytes from 10.40.40.4: icmp_seq=3 ttl=64 time=115 ms <br>
+80 bytes from 10.40.40.4: icmp_seq=4 ttl=64 time=117 ms <br>
+80 bytes from 10.40.40.4: icmp_seq=5 ttl=64 time=119 ms <br>
+
+--- 10.40.40.4 ping statistics --- <br>
+5 packets transmitted, 5 received, 0% packet loss, time 51ms<br>
+rtt min/avg/max/mdev = 96.785/111.205/119.204/8.405 ms, pipe 5, ipg/ewma 12.944/109.525 ms <br>
+
+
+dc01-pod01-leaf02#ping vrf CUSTOMER_L3VNI 10.30.30.4 source 10.40.40.2 <br>
+PING 10.30.30.4 (10.30.30.4) from 10.40.40.2 : 72(100) bytes  of data. <br>
+80 bytes from 10.30.30.4: icmp_seq=1 ttl=64 time=103 ms <br>
+80 bytes from 10.30.30.4: icmp_seq=2 ttl=64 time=98.2 ms <br>
+80 bytes from 10.30.30.4: icmp_seq=3 ttl=64 time=117 ms <br>
+80 bytes from 10.30.30.4: icmp_seq=4 ttl=64 time=121 ms <br>
+80 bytes from 10.30.30.4: icmp_seq=5 ttl=64 time=129 ms <br>
+
+--- 10.30.30.4 ping statistics --- <br>
+5 packets transmitted, 5 received, 0% packet loss, time 46ms <br>
+rtt min/avg/max/mdev = 98.279/113.970/129.298/11.413 ms, pipe 5, ipg/ewma 11.606/109.692 ms <br>
+
+ 
+#### Пинги в сторону LEAF02 с ПК, включенного в LEAF04 <br>
+<br>
+VPCS> ip 10.30.30.30/24 10.30.30.1<br>
+Checking for duplicate address...<br>
+VPCS : 10.30.30.30 255.255.255.0 gateway 10.30.30.1 <br>
+<br>
+
+
+VPCS> ping 10.30.30.2 <br>
+<br>
+84 bytes from 10.30.30.2 icmp_seq=1 ttl=63 time=41.829 ms <br>
+84 bytes from 10.30.30.2 icmp_seq=2 ttl=63 time=52.854 ms <br>
+84 bytes from 10.30.30.2 icmp_seq=3 ttl=63 time=70.110 ms <br>
+84 bytes from 10.30.30.2 icmp_seq=4 ttl=63 time=36.718 ms <br>
+84 bytes from 10.30.30.2 icmp_seq=5 ttl=63 time=46.140 ms <br>
+ <br>
+VPCS> ping 10.40.40.2 <br>
+<br>
+84 bytes from 10.40.40.2 icmp_seq=1 ttl=63 time=737.575 ms <br>
+84 bytes from 10.40.40.2 icmp_seq=2 ttl=63 time=80.171 ms <br>
+84 bytes from 10.40.40.2 icmp_seq=3 ttl=63 time=71.114 ms <br>
+84 bytes from 10.40.40.2 icmp_seq=4 ttl=63 time=69.663 ms <br>
+84 bytes from 10.40.40.2 icmp_seq=5 ttl=63 time=42.761 ms <br>
+
+
+
 
 ##### dc01-pod01-leaf01
 dc01-pod01-leaf01#show bgp evpn summary
