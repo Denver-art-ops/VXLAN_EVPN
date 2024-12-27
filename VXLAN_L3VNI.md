@@ -64,6 +64,109 @@ interface Vlan20 <br>
 
 ### VLAN 30 и VLAN 40   созданы только на Leaf02 и Leaf04 для проверки работы Symmetric IRB.  Для них создан VRF СUSTOMER_L3VNI и собственно L3VNI.
 
+фрагменты дополнительной настройки LEAF02: <br>
+
+interface Vlan30 <br>
+   vrf CUSTOMER_L3VNI <br>
+   ip address 10.30.30.2/24 <br>
+   ip virtual-router address 10.30.30.1/24 <br>
+! <br>
+interface Vlan40 <br>
+   vrf CUSTOMER_L3VNI <br>
+   ip address 10.40.40.2/24 <br>
+   ip virtual-router address 10.40.40.1/24 <br>
+! <br>
+interface Vxlan1 <br>
+   description =VXLAN= <br>
+   vxlan source-interface Loopback1 <br>
+   vxlan udp-port 4789 <br>
+   vxlan vlan 10 vni 100010 <br>
+   vxlan vlan 30 vni 100030 <br>
+   vxlan vlan 40 vni 100040 <br>
+   vxlan vrf CUSTOMER_L3VNI vni 1000777 <br>
+   vxlan learn-restrict any <br>
+! <br>
+ip virtual-router mac-address 00:00:00:00:00:10 <br>
+! <br>
+ip routing <br>
+ip routing vrf CUSTOMER_L3VNI <br>
+<br>
+router bgp 4259905001 <br>
+   router-id 10.11.1.4 <br>
+   ! <br>
+   vlan 30 <br>
+      rd 65001:100030 <br>
+      route-target both 65001:30 <br>
+      redistribute learned <br>
+      redistribute static <br>
+   ! <br>
+   vlan 40 <br>
+      rd 65001:100040 <br>
+      route-target both 65001:40 <br>
+      redistribute learned <br>
+      redistribute static <br>
+   !<br>
+    vrf CUSTOMER_L3VNI <br>
+      rd 10.11.1.4:1 <br>
+      route-target import evpn 65000:1 <br>
+      route-target export evpn 65000:1 <br>
+      redistribute connected <br>
+
+фрагменты дополнительной настройки LEAF04: <br>
+! <br>
+interface Vlan30 <br>
+   vrf CUSTOMER_L3VNI <br>
+   ip address 10.30.30.4/24 <br>
+   ip virtual-router address 10.30.30.1/24 <br>
+! <br>
+interface Vlan40 <br>
+   vrf CUSTOMER_L3VNI <br>
+   ip address 10.40.40.4/24 <br>
+   ip virtual-router address 10.40.40.1/24 <br>
+! <br>
+interface Vxlan1 <br>
+   description =VXLAN= <br>
+   vxlan source-interface Loopback1 <br>
+   vxlan udp-port 4789 <br>
+   vxlan vlan 10 vni 100010 <br>
+   vxlan vlan 30 vni 100030 <br>
+   vxlan vlan 40 vni 100040 <br>
+   vxlan vrf CUSTOMER_L3VNI vni 1000777 <br>
+   vxlan learn-restrict any <br>
+! <br>
+ip virtual-router mac-address 00:00:00:00:00:10 <br>
+! <br>
+ip routing <br>
+ip routing vrf CUSTOMER_L3VNI <br>
+! <br>
+ip routing <br>
+ip routing vrf CUSTOMER_L3VNI <br>
+! <br>
+router bgp 4259905003 <br>
+   router-id 10.11.1.6 <br>
+  ! <br>
+   vlan 30 <br>
+      rd 65001:100030 <br>
+      route-target both 65001:30 <br>
+      redistribute learned <br>
+      redistribute static <br>
+   ! <br>
+   vlan 40 <br>
+      rd 65001:100040 <br>
+      route-target both 65001:40 <br>
+      redistribute learned <br>
+      redistribute static <br>
+   ! <br>
+   vrf CUSTOMER_L3VNI <br>
+      rd 10.11.1.6:1 <br>
+      route-target import evpn 65000:1 <br>
+      route-target export evpn 65000:1 <br>
+      redistribute connected <br>
+! <br>
+end <br>
+dc01-pod01-leaf04# <br>
+
+
 ## Подтверждение работоспособности Assimetric IRB
 
 Пингуем с интерфейса в VLAN20  c ip адресом 10.10.10.2 с LEAF01  адрес в VLAN 10 на LEAF03  10.88.88.3 <br>
