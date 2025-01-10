@@ -473,4 +473,22 @@ Port Channel Port-Channel1:
 
 ```
 ### Проверяем состояние ESI LAG
-
+```
+dc01-pod01-leaf03#show bgp evpn instance vlan-aware-bundle TEST_ESI_LAG
+EVPN instance: VLAN-aware bundle TEST_ESI_LAG
+  Route distinguisher: 0.0.0.1:1
+  Route target import: Route-Target-AS:100:100
+  Route target export: Route-Target-AS:100:100
+  Service interface: VLAN-aware bundle
+  Local VXLAN IP address: 10.11.1.5
+  VXLAN: enabled
+  MPLS: disabled
+  Local ethernet segment:
+    ESI: 0000:babe:face:fade:bace
+      Interface: Port-Channel1
+      Mode: all-active
+      State: up
+      ES-Import RT:
+      DF election algorithm: modulus
+      Designated forwarder: 10.11.1.5
+```
