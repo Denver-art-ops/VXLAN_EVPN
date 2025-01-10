@@ -1,0 +1,60 @@
+CUSTOMER#show running-config
+! Command: show running-config
+! device: CUSTOMER (vEOS-lab, EOS-4.29.2F)
+!
+! boot system flash:/vEOS-lab.swi
+!
+no aaa root
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model ribd
+!
+hostname CUSTOMER
+!
+spanning-tree mode mstp
+!
+vlan 201-202
+   name TEST_ESI_LAG
+   trunk group ESI_LAG
+!
+interface Port-Channel1
+   switchport mode trunk
+   switchport trunk group ESI_LAG
+   traffic-engineering
+!
+interface Ethernet1
+   description =LAG=
+   mtu 9214
+   channel-group 1 mode active
+!
+interface Ethernet2
+   description =LAG=
+   mtu 9214
+   channel-group 1 mode active
+!
+interface Ethernet3
+!
+interface Ethernet4
+!
+interface Ethernet5
+!
+interface Ethernet6
+!
+interface Ethernet7
+!
+interface Ethernet8
+!
+interface Management1
+!
+interface Vlan201
+   ip address 1.1.1.1/24
+!
+interface Vlan202
+   ip address 2.2.2.2/24
+!
+ip routing
+!
+ip route 0.0.0.0/0 1.1.1.254
+!
+end
