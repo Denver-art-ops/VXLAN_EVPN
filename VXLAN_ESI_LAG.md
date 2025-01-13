@@ -457,7 +457,28 @@ AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Li
  *  ec    RD: 10.11.1.6:1 auto-discovery 0000:babe:face:fade:bace
                                  10.11.1.6             -       100     0       4259840001 4259905003 i
 ```
+### Смотрим Type-4 анонсы:
 
+```
+dc01-pod01-leaf01#show bgp evpn route-type ethernet-segment
+BGP routing table information for VRF default
+Router identifier 10.11.1.3, local AS number 4259905000
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >Ec    RD: 10.11.1.5:1 ethernet-segment 0000:babe:face:fade:bace 10.11.1.5
+                                 10.11.1.5             -       100     0       4259840001 4259905002 i
+ *  ec    RD: 10.11.1.5:1 ethernet-segment 0000:babe:face:fade:bace 10.11.1.5
+                                 10.11.1.5             -       100     0       4259840002 4259905002 i
+ * >Ec    RD: 10.11.1.6:1 ethernet-segment 0000:babe:face:fade:bace 10.11.1.6
+                                 10.11.1.6             -       100     0       4259840001 4259905003 i
+ *  ec    RD: 10.11.1.6:1 ethernet-segment 0000:babe:face:fade:bace 10.11.1.6
+                                 10.11.1.6             -       100     0       4259840002 4259905003 i
+
+```
 ### Проверяем состояние LACP на коммутаторе CUSTOMER
 ```
 CUSTOMER#show lacp 1 peer all-ports
@@ -494,25 +515,4 @@ EVPN instance: VLAN-aware bundle TEST_ESI_LAG
       Designated forwarder: 10.11.1.5
 ```
 
-### Смотрим Type-4 анонсы:
 
-```
-dc01-pod01-leaf01#show bgp evpn route-type ethernet-segment
-BGP routing table information for VRF default
-Router identifier 10.11.1.3, local AS number 4259905000
-Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
-                    c - Contributing to ECMP, % - Pending BGP convergence
-Origin codes: i - IGP, e - EGP, ? - incomplete
-AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
-
-          Network                Next Hop              Metric  LocPref Weight  Path
- * >Ec    RD: 10.11.1.5:1 ethernet-segment 0000:babe:face:fade:bace 10.11.1.5
-                                 10.11.1.5             -       100     0       4259840001 4259905002 i
- *  ec    RD: 10.11.1.5:1 ethernet-segment 0000:babe:face:fade:bace 10.11.1.5
-                                 10.11.1.5             -       100     0       4259840002 4259905002 i
- * >Ec    RD: 10.11.1.6:1 ethernet-segment 0000:babe:face:fade:bace 10.11.1.6
-                                 10.11.1.6             -       100     0       4259840001 4259905003 i
- *  ec    RD: 10.11.1.6:1 ethernet-segment 0000:babe:face:fade:bace 10.11.1.6
-                                 10.11.1.6             -       100     0       4259840002 4259905003 i
-
-```
