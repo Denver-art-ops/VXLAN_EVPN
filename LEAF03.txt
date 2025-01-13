@@ -33,6 +33,7 @@ interface Port-Channel1
    !
    evpn ethernet-segment
       identifier 0000:babe:face:fade:bace
+      route-target import ba:be:fa:ce:ba:ce
    lacp system-id fade.babe.face
 !
 interface Ethernet1
@@ -189,3 +190,4 @@ router bgp 4259905002
       redistribute connected
 !
 end
+dc01-pod01-leaf03#
