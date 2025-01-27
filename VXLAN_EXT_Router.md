@@ -22,6 +22,7 @@
 | [LEAF02.cfg](LEAF02.txt)    |
 | [LEAF03.cfg](LEAF03.txt)    |
 | [LEAF04.cfg](LEAF04.txt)    |
+| [CUSTOMER.cfg](CUSTOMER.txt)|
 
 ### В качестве внешнего маршрутизатора воспользуемся уже существующим подключением маршрутизатора CUSTOMER.  Но в существующем Port-channel в транках добавим новые VLAN 301-302 в них на SVI поднимем BGP-пиринг между LEAF03-04 и CUSTOMER.
 
