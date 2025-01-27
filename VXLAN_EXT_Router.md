@@ -30,7 +30,6 @@
 ### Эмулируем своего рода ядро сети.
 
 
-
 ```
 # leaf01
 vlan 4000
@@ -106,6 +105,33 @@ no shut
 !
 ip virtual-router mac-address babe.face.fade
 ```
+
+
+- #### Data Center #1
+<details>
+  <summary>DC1-TORSW-01</summary>
+  
+```
+
+DC1-TORSW-01(config-router-bgp)#sh run
+
+
+```
+
+</details>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ### Для повышения отказоустойчивости создаем интерфейс Dual Active Detection (DAD) во избежание split-brain при аварии. В качестве DAD линка используем MGMT интерфейс
 
