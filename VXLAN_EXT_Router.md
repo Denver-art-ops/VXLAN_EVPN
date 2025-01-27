@@ -10,7 +10,7 @@
 Описаны в документе: [README.md](README.md)
 
 ### Итоговая схема
-![Topology_MCLAG.png](Topology_MCLAG.png)
+![EXT_FW.png](EXT_FW.png)
 
 ## Конфигурации устройств:
 
