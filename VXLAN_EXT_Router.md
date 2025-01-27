@@ -321,11 +321,10 @@ Neighbor Status Codes: m - Under maintenance
 ```
 </details>
 
-
 ### Проверяем, какие маршруты анонсируются CUSTOMER в сторону LEAF03-04 в VRF GREEN и RED
 
 <details>
-  <summary>CUSTOMER#show ip bgp neighbors 192.168.1.39 advertised-routes vrf GREEN </summary>
+  <summary> CUSTOMER#show ip bgp neighbors 192.168.1.39 advertised-routes vrf GREEN </summary>
 ```
 CUSTOMER#show ip bgp neighbors 192.168.1.39 advertised-routes vrf GREEN
 BGP routing table information for VRF GREEN
@@ -346,7 +345,7 @@ AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Li
 </details>
 
 <details>
-  <summary>CUSTOMER#show ip bgp neighbors 192.168.2.39 advertised-routes vrf RED </summary>
+  <summary> CUSTOMER#show ip bgp neighbors 192.168.2.39 advertised-routes vrf RED </summary>
 ```
 CUSTOMER#show ip bgp neighbors 192.168.2.39 advertised-routes vrf RED
 BGP routing table information for VRF RED
@@ -366,9 +365,8 @@ AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Li
 ```
 </details>
 
-
 <details>
-  <summary>CUSTOMER#show ip bgp neighbors 192.168.1.40 advertised-routes vrf GREEN </summary>
+  <summary> CUSTOMER#show ip bgp neighbors 192.168.1.40 advertised-routes vrf GREEN </summary>
 ```
 CUSTOMER#show ip bgp neighbors 192.168.1.40 advertised-routes vrf GREEN
 BGP routing table information for VRF GREEN
