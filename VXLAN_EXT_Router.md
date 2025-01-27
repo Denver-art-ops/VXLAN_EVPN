@@ -341,6 +341,7 @@ AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Li
  * >      192.168.2.0/24         192.168.1.200         -       -          -       -       65500 i
  * >      192.168.3.0/24         192.168.1.200         -       -          -       -       65500 i
  * >      192.168.4.0/24         192.168.1.200         -       -          -       -       65500 i
+
 ```
 </details>
 
@@ -406,7 +407,6 @@ AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Li
  * >      192.168.4.0/24         192.168.2.200         -       -          -       -       65500 i
 ```
 </details>
-
 
 ### Проверяем таблицу маршрутизации CUSTOMER в VRF GREEN и RED 
 
@@ -595,5 +595,5 @@ rtt min/avg/max/mdev = 172.666/205.146/245.556/26.222 ms, pipe 5, ipg/ewma 11.60
 </details>
 
 
-### ВЫВОДЫ: внешние type-5 маршруты анонсируются, роут-ликинг работает.
+###  ВЫВОДЫ: внешние type-5 маршруты анонсируются, роут-ликинг работает.
 
