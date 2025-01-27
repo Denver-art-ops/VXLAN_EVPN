@@ -207,8 +207,8 @@ router bgp 4259905003
 </details>
 
 ####  Этап 3 Создаем VLAN 301-302 в port-channel на стороне внешнего маршрутизатора CUSTOMER. Ассоциируем с этими VLAN локальные VRF RED и VRF GREEN. Создаем также два локальных VLAN 401-402 в VRF GREEN и RED (для проверки).
-### Настраиваем BGP-пиринг с LEAF03 и LEAF04 на SVI-интерфейсах VLANов 301-302.
-### Настраиваем route-leaking между VRF GREEN и VRF RED в AF EVPN локально на марашрутизаторе CUSTOMER
+#### Настраиваем BGP-пиринг с LEAF03 и LEAF04 на SVI-интерфейсах VLANов 301-302.
+#### Настраиваем route-leaking между VRF GREEN и VRF RED в AF EVPN локально на марашрутизаторе CUSTOMER
 
 <details>
   <summary>Настройка CUSTOMER </summary>
@@ -296,7 +296,8 @@ router bgp 65500
 
 ### Проверяем состояние BGP между CUSTOMER и LEAF03-04 в VRF GREEN и  RED
 <details>
-  <summary>CUSTOMER#show ip bgp summary vrf GREEN </summary>
+  <summary> CUSTOMER#show ip bgp summary vrf GREEN </summary>
+  
 ```
 CUSTOMER#show ip bgp summary vrf GREEN
 BGP summary information for VRF GREEN
@@ -310,6 +311,7 @@ Neighbor Status Codes: m - Under maintenance
 
 <details>
   <summary>CUSTOMER#show ip bgp summary vrf RED </summary>
+  
 ```
 CUSTOMER#show ip bgp summary vrf RED
 BGP summary information for VRF RED
@@ -325,6 +327,7 @@ Neighbor Status Codes: m - Under maintenance
 
 <details>
   <summary> CUSTOMER#show ip bgp neighbors 192.168.1.39 advertised-routes vrf GREEN </summary>
+  
 ```
 CUSTOMER#show ip bgp neighbors 192.168.1.39 advertised-routes vrf GREEN
 BGP routing table information for VRF GREEN
@@ -347,6 +350,7 @@ AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Li
 
 <details>
   <summary> CUSTOMER#show ip bgp neighbors 192.168.2.39 advertised-routes vrf RED </summary>
+  
 ```
 CUSTOMER#show ip bgp neighbors 192.168.2.39 advertised-routes vrf RED
 BGP routing table information for VRF RED
@@ -368,6 +372,7 @@ AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Li
 
 <details>
   <summary> CUSTOMER#show ip bgp neighbors 192.168.1.40 advertised-routes vrf GREEN </summary>
+  
 ```
 CUSTOMER#show ip bgp neighbors 192.168.1.40 advertised-routes vrf GREEN
 BGP routing table information for VRF GREEN
@@ -389,6 +394,7 @@ AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Li
 
 <details>
   <summary>CUSTOMER#show ip bgp neighbors 192.168.2.40 advertised-routes vrf RED </summary>
+  
 ```
 CUSTOMER#show ip bgp neighbors 192.168.2.40 advertised-routes vrf RED
 BGP routing table information for VRF RED
@@ -412,6 +418,7 @@ AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Li
 
 <details>
   <summary>CUSTOMER#show ip route vrf GREEN </summary>
+  
 ```
 CUSTOMER#show ip route vrf GREEN
 
@@ -439,6 +446,7 @@ Gateway of last resort is not set
 
 <details>
   <summary>CUSTOMER#show ip route vrf RED </summary>
+  
 ```
 CUSTOMER#show ip route vrf RED
 
@@ -469,6 +477,7 @@ Gateway of last resort is not set
 
 <details>
   <summary>dc01-pod01-leaf04#show ip route vrf GREEN </summary>
+  
 ```
 dc01-pod01-leaf04#show ip route vrf GREEN
 
@@ -496,6 +505,7 @@ Gateway of last resort is not set
 
 <details>
   <summary>dc01-pod01-leaf04#show ip route vrf RED </summary>
+  
 ```
 dc01-pod01-leaf04#show ip route vrf RED
 
@@ -526,6 +536,7 @@ Gateway of last resort is not set
 
 <details>
   <summary>dc01-pod01-leaf04#show bgp evpn route-type ip-prefix 192.168.4.0 </summary>
+  
 ``` 
 dc01-pod01-leaf04#show bgp evpn route-type ip-prefix 192.168.4.0
 BGP routing table information for VRF default
@@ -557,9 +568,11 @@ BGP routing table entry for ip-prefix 192.168.4.0/24, Route Distinguisher: 10009
 dc01-pod01-leaf04#
 ```
 </details>
+
 ### Проверяем Доступность интерфейсов, находящихся  в разных VRF на LEAF04
 <details>
   <summary>dc01-pod01-leaf04#ping vrf GREEN 192.168.2.200 source 192.168.1.40 </summary>
+  
 ``` 
 dc01-pod01-leaf04#ping vrf GREEN 192.168.2.200 source 192.168.1.40
 
@@ -578,6 +591,7 @@ rtt min/avg/max/mdev = 185.253/313.652/513.107/116.399 ms, pipe 5, ipg/ewma 12.5
 
 <details>
   <summary>dc01-pod01-leaf04#ping vrf GREEN 192.168.4.200 source 192.168.1.40 </summary>
+  
 ```
 dc01-pod01-leaf04#ping vrf GREEN 192.168.4.200 source 192.168.1.40
 
