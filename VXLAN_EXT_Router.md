@@ -559,10 +559,7 @@ BGP routing table entry for ip-prefix 192.168.4.0/24, Route Distinguisher: 10009
 dc01-pod01-leaf04#
 ```
 </details>
-
-
 ### Проверяем Доступность интерфейсов, находящихся  в разных VRF на LEAF04
-
 <details>
   <summary>dc01-pod01-leaf04#ping vrf GREEN 192.168.2.200 source 192.168.1.40 </summary>
 ``` 
