@@ -470,7 +470,7 @@ dc01-pod01-spine02#
 </details> 
 
 <details>
-  <summary>Настройка LEAF01 </summary>
+  <summary>LEAF01 </summary>
 
 ```
 dc01-pod01-leaf01#show running-config
@@ -760,7 +760,7 @@ dc01-pod01-leaf01#
 </details> 
 
 <details>
-  <summary>Настройка LEAF02 </summary>
+  <summary>LEAF02 </summary>
 
 ```
 dc01-pod01-leaf02#show running-config
