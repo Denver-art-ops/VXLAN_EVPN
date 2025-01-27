@@ -29,95 +29,162 @@
 ### Вместо того, чтобы автоматически "смешать" два VRF в Global таблице внешнего маршрутизатора CUSTOMER, "вытянем" по Option-A VRF GREEN и RED на стороннее устройство, чтобы иметь возможность манипулировать ликингом маршрутов между ними.
 ### Эмулируем своего рода ядро сети.
 
+####  Этап 1 Создаем на LEAF03 и LEAF04  VRF GREEN и RED, создаем SVI интерфейсы в этих VRF и добавляем ассоциированные VLAN в L2 VNI a VRF в L3 VNI.  Настраиваем пиринг с IP интерфейсами внешнего маршрутизатора CUSTOMER (192.168.1.200 в VLAN 301 и 192.168.2.200 в VLAN 302)
 
-```
-# leaf01
-vlan 4000
-   name =MLAG_Peer_VLAN=
-   trunk group MLAG_Peer
-!
-interface Vlan4000
-  ip address 10.40.0.254/31
-!
-
-interface Port-Channel4000
-   description =MLAG_Peer=
-   switchport trunk group MLAG_Peer
-   spanning-tree link-type point-to-point
-!
-interface Ethernet5
-   description =MLAG_peer_link=
-   channel-group 4000 mode active
-!
-interface Port-Channel4000
-   description =MLAG_Peer=
-   switchport mode trunk
-   switchport trunk group MLAG_Peer
-   spanning-tree link-type point-to-point
-!
-exit
- no spanning-tree vlan 4000
-!
-mlag configuration
-   domain-id LEAF01-02
-   local-interface Vlan4000
-   peer-address 10.40.0.255
-   peer-link Port-Channel4000
-no shut
-!
-ip virtual-router mac-address babe.face.fade
-```
-
-```
-# leaf02
-vlan 4000
-   name =MLAG_Peer_VLAN=
-   trunk group MLAG_Peer
-!
-interface Vlan4000
-  ip address 10.40.0.255/31
-!
-
-interface Port-Channel4000
-   description =MLAG_Peer=
-   switchport trunk group MLAG_Peer
-   spanning-tree link-type point-to-point
-!
-interface Ethernet5
-   description =MLAG_peer_link=
-   channel-group 4000 mode active
-!
-interface Port-Channel4000
-   description =MLAG_Peer=
-   switchport mode trunk
-   switchport trunk group MLAG_Peer
-   spanning-tree link-type point-to-point
-!
-exit
- no spanning-tree vlan 4000
-!
-mlag configuration
-   domain-id LEAF01-02
-   local-interface Vlan4000
-   peer-address 10.40.0.254
-   peer-link Port-Channel4000
-no shut
-!
-ip virtual-router mac-address babe.face.fade
-```
-
-
-- #### Data Center #1
 <details>
-  <summary>DC1-TORSW-01</summary>
-  
+  <summary>Настройка LEAF03 </summary>
+   
 ```
-
-DC1-TORSW-01(config-router-bgp)#sh run
-
-
+vlan 301
+   name GREEN
+!
+vlan 302
+   name RED
+!
+vrf instance GREEN
+!
+vrf instance RED
+!
+interface Port-Channel1
+   switchport trunk allowed vlan add 301-302
+!
+interface Vlan301
+   vrf GREEN
+   ip address 192.168.1.39/24
+   ip virtual-router address 192.168.1.1/24
+!
+interface Vlan302
+   vrf RED
+   ip address 192.168.2.39/24
+   ip virtual-router address 192.168.2.1/24
+!
+interface Vxlan1
+   description =VXLAN=
+   vxlan source-interface Loopback1
+   vxlan udp-port 4789
+   vxlan vlan 10 vni 100010
+   vxlan vlan 20 vni 100020
+   vxlan vlan 201 vni 100201
+   vxlan vlan 202 vni 100202
+   vxlan vlan 301 vni 1000301
+   vxlan vlan 302 vni 1000302
+   vxlan vrf CUSTOMER_L3VNI vni 1000777
+   vxlan vrf GREEN vni 1000888
+   vxlan vrf RED vni 1000999
+   vxlan learn-restrict any
+!
+ip routing vrf GREEN
+ip routing vrf RED
+!
+router bgp 4259905002
+!
+   vlan 301
+      rd 65001:1000301
+      route-target both 301:301
+   !
+   vlan 302
+      rd 65001:1000302
+      route-target both 302:302
+   !
+   vrf GREEN
+      rd 1000888:888
+      route-target import evpn 301:1000888
+      route-target export evpn 301:1000888
+      neighbor 192.168.1.200 remote-as 65500
+      neighbor 192.168.1.200 description GREEN_VRF-GW
+      !
+      address-family ipv4
+         neighbor 192.168.1.200 activate
+   !
+   vrf RED
+      rd 1000999:999
+      route-target import evpn 302:1000999
+      route-target export evpn 302:1000999
+      neighbor 192.168.2.200 remote-as 65500
+      neighbor 192.168.2.200 description RED_VRF-GW
+      !
+      address-family ipv4
+         neighbor 192.168.2.200 activate
+!
 ```
+</details>
 
+<details>
+  <summary>Настройка LEAF04 </summary>
+   
+```
+vlan 301
+   name GREEN
+!
+vlan 302
+   name RED
+!
+vrf instance GREEN
+!
+vrf instance RED
+!
+interface Port-Channel1
+   switchport trunk allowed vlan add 301-302
+!
+interface Vlan301
+   vrf GREEN
+   ip address 192.168.1.39/24
+   ip virtual-router address 192.168.1.1/24
+!
+interface Vlan302
+   vrf RED
+   ip address 192.168.2.39/24
+   ip virtual-router address 192.168.2.1/24
+!
+interface Vxlan1
+   description =VXLAN=
+   vxlan source-interface Loopback1
+   vxlan udp-port 4789
+   vxlan vlan 10 vni 100010
+   vxlan vlan 20 vni 100020
+   vxlan vlan 201 vni 100201
+   vxlan vlan 202 vni 100202
+   vxlan vlan 301 vni 1000301
+   vxlan vlan 302 vni 1000302
+   vxlan vrf CUSTOMER_L3VNI vni 1000777
+   vxlan vrf GREEN vni 1000888
+   vxlan vrf RED vni 1000999
+   vxlan learn-restrict any
+!
+ip routing vrf GREEN
+ip routing vrf RED
+!
+router bgp 4259905002
+!
+   vlan 301
+      rd 65001:1000301
+      route-target both 301:301
+   !
+   vlan 302
+      rd 65001:1000302
+      route-target both 302:302
+   !
+   vrf GREEN
+      rd 1000888:888
+      route-target import evpn 301:1000888
+      route-target export evpn 301:1000888
+      neighbor 192.168.1.200 remote-as 65500
+      neighbor 192.168.1.200 description GREEN_VRF-GW
+      !
+      address-family ipv4
+         neighbor 192.168.1.200 activate
+   !
+   vrf RED
+      rd 1000999:999
+      route-target import evpn 302:1000999
+      route-target export evpn 302:1000999
+      neighbor 192.168.2.200 remote-as 65500
+      neighbor 192.168.2.200 description RED_VRF-GW
+      !
+      address-family ipv4
+         neighbor 192.168.2.200 activate
+!
+```
 </details>
 
 
