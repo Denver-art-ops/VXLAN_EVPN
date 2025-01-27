@@ -29,7 +29,7 @@
 ### Вместо того, чтобы автоматически "смешать" два VRF в Global таблице внешнего маршрутизатора CUSTOMER, "вытянем" по Option-A VRF GREEN и RED на стороннее устройство, чтобы иметь возможность манипулировать ликингом маршрутов между ними.
 ### Эмулируем своего рода ядро сети.
 
-####  Этап 1 Создаем на LEAF03 и LEAF04  VRF GREEN и RED, создаем SVI интерфейсы в этих VRF и добавляем ассоциированные VLAN в L2 VNI a VRF в L3 VNI.  Настраиваем пиринг с IP интерфейсами внешнего маршрутизатора CUSTOMER (192.168.1.200 в VLAN 301 и 192.168.2.200 в VLAN 302)
+####  Этап 1 Создаем на LEAF03   VRF GREEN и RED, создаем SVI интерфейсы в этих VRF и добавляем ассоциированные VLAN в L2 VNI a VRF в L3 VNI.  Настраиваем пиринг с IP интерфейсами внешнего маршрутизатора CUSTOMER (192.168.1.200 в VLAN 301 и 192.168.2.200 в VLAN 302)
 
 <details>
   <summary>Настройка LEAF03 </summary>
@@ -109,6 +109,8 @@ router bgp 4259905002
 ```
 </details>
 
+####  Этап 2 Создаем на LEAF04   VRF GREEN и RED, создаем SVI интерфейсы в этих VRF и добавляем ассоциированные VLAN в L2 VNI a VRF в L3 VNI.  Настраиваем пиринг с IP интерфейсами внешнего маршрутизатора CUSTOMER (192.168.1.200 в VLAN 301 и 192.168.2.200 в VLAN 302), также создаем два SVI в 501-502 VLAN и добавляем их в VRF GREEN и VRF RED (для проверки).
+
 <details>
   <summary>Настройка LEAF04 </summary>
    
@@ -119,29 +121,40 @@ vlan 301
 vlan 302
    name RED
 !
+vlan 501-502
+
 vrf instance GREEN
 !
 vrf instance RED
 !
 interface Port-Channel1
    switchport trunk allowed vlan add 301-302
-!
+!  
 interface Vlan301
    vrf GREEN
-   ip address 192.168.1.39/24
+   ip address 192.168.1.40/24
    ip virtual-router address 192.168.1.1/24
 !
 interface Vlan302
    vrf RED
-   ip address 192.168.2.39/24
+   ip address 192.168.2.40/24
    ip virtual-router address 192.168.2.1/24
+!
+interface Vlan501
+   vrf GREEN
+   ip address 192.168.22.40/24
+!
+interface Vlan502
+   vrf RED
+   ip address 192.168.23.40/24
 !
 interface Vxlan1
    description =VXLAN=
    vxlan source-interface Loopback1
    vxlan udp-port 4789
    vxlan vlan 10 vni 100010
-   vxlan vlan 20 vni 100020
+   vxlan vlan 30 vni 100030
+   vxlan vlan 40 vni 100040
    vxlan vlan 201 vni 100201
    vxlan vlan 202 vni 100202
    vxlan vlan 301 vni 1000301
@@ -154,8 +167,8 @@ interface Vxlan1
 ip routing vrf GREEN
 ip routing vrf RED
 !
-router bgp 4259905002
-!
+router bgp 4259905003
+  !
    vlan 301
       rd 65001:1000301
       route-target both 301:301
@@ -163,6 +176,12 @@ router bgp 4259905002
    vlan 302
       rd 65001:1000302
       route-target both 302:302
+  !
+   vrf CUSTOMER_L3VNI
+      rd 10.11.1.6:1
+      route-target import evpn 65000:1
+      route-target export evpn 65000:1
+      redistribute connected
    !
    vrf GREEN
       rd 1000888:888
